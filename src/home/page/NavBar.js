@@ -2,18 +2,23 @@ import { useState } from "react";
 import { menu, location, moon, sun } from "../../utility/svg/icons";
 import SearchBar from "../component/SearchBar";
 
-const Navbar = ({ onMenuClick }) => {
+const Navbar = ({ onMenuClick, toggleDarkMode }) => {
   const [theme, setTheme] = useState("light");
 
+  const handleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+    toggleDarkMode();
+  };
+
   return (
-    <div className="md:mt-1 p-4 flex items-center bg-gray-800 rounded-2xl mb-3">
+    <div className=" md:mt-1 p-4 flex items-center bg-gray-800 rounded-2xl mb-3">
       <div
         className=" flex justify-center text-white items-center"
         onClick={onMenuClick}
       >
         {menu}
       </div>
-      <div className="hidden md:block text-white ml-2 justify-center uppercase font-bold  absolute">
+      <div className="hidden  md:block  ml-2 justify-center uppercase text-2xl font-bold ">
         <div>Grab And Go</div>
       </div>
       <div className="flex justify-end items-center gap-5 grow">
@@ -24,7 +29,7 @@ const Navbar = ({ onMenuClick }) => {
           {location}
         </div>
         <div
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          onClick={handleTheme}
           className={`hidden md:flex  p-3 gap-5 rounded-full  ${
             theme === "light" ? "bg-white" : "bg-black"
           } transition ease-in-out duration-500 cursor-pointer`}
@@ -40,7 +45,7 @@ const Navbar = ({ onMenuClick }) => {
         </div>
 
         <div
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          onClick={handleTheme}
           className={`sm:block md:hidden p-3 rounded-full  ${
             theme === "light" ? "bg-white" : "bg-black"
           } transition ease-in-out duration-500 cursor-pointer`}

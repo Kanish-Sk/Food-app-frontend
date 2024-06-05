@@ -34,8 +34,8 @@ img {
 }
 
 .swiper {
-  --swiper-pagination-color: gray;
-  --swiper-pagination-bullet-inactive-color: gray;
+  --swiper-pagination-color: rgb(203, 203, 203);
+  --swiper-pagination-bullet-inactive-color: rgb(255, 255, 255);
 }
 
 .button-next,
@@ -45,13 +45,14 @@ img {
   width: 50px;
   padding: 10px;
   border-radius: 10px;
-  background-color: rgba(94, 99, 99, 0.2);
+  background: rgba(255, 255, 255, 0.25); /* Semi-transparent white background */
+  backdrop-filter: blur(5px); /* Apply background blur */
   transform: translateY(-50%);
   cursor: pointer;
-  z-index: 10;
+  z-index: 3;
 }
 :is(.button-next, .button-prev):hover {
-  background-color: rgba(41, 42, 42, 0.2);
+  background-color: rgba(20, 175, 175, 0.2);
 }
 
 .button-next {
@@ -59,4 +60,37 @@ img {
 }
 .button-prev {
   left: 10px;
+}
+
+/* Media query for small screens */
+@media (max-width: 640px) {
+  .swiper-wrapper {
+    height: 130px; /* Decrease height for small screens */
+  }
+
+  .swiper-slide {
+    height: 150px; /* Adjust height of slides accordingly */
+  }
+
+  img {
+    width: 98%;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 15px;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+  }
+
+  .button-next,
+  .button-prev {
+    width: 40px; /* Decrease width */
+    height: 40px; /* Decrease height */
+    padding: 8px; /* Adjust padding */
+    border-radius: 8px; /* Adjust border-radius */
+  }
+
+  .swiper {
+    --swiper-pagination-bullet-inactive-color: rgb(8, 8, 8);
+  }
 }

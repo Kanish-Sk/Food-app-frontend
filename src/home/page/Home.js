@@ -1,10 +1,7 @@
-import Carousel from "../component/carousel";
 import image1 from "../component/assets/food1.jpeg";
 import image2 from "../component/assets/food2.jpg";
 import image3 from "../component/assets/food3.jpg";
 import Carouselwrapper from "../component/CarouselWrapper";
-
-const imgs = [image1, image2, image3];
 
 const Home = () => {
   const hotels = [
@@ -75,15 +72,15 @@ const Home = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div className="p-2 pr-0">
-        <h1 className="text-gray-900 text-xl font-bold mb-4 justify-center flex">
+      <div className="p-1 pr-0 ">
+        <h1 className=" text-lg mb-2 md:text-xl md:mb-4 font-bold justify-center flex">
           Top Rated Hotels
         </h1>
         <Carouselwrapper props={hotels} />
       </div>
 
-      <div className="p-2 pr-0">
-        <h1 className="text-gray-900 text-xl font-bold mb-4 justify-center flex">
+      <div className="p-1 pr-0">
+        <h1 className=" text-lg mb-2 md:text-xl md:mb-4 font-bold justify-center flex">
           Mosted Liked Dishes
         </h1>
         <Carouselwrapper props={dishes} />

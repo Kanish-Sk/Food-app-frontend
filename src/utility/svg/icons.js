@@ -5,7 +5,7 @@ export const menu = (
     viewBox="0 0 24 24"
     strokeWidth={2.0}
     stroke="currentColor"
-    className="size-6 md:hidden mr-2"
+    className="size-8 md:hidden mr-2"
   >
     <path
       strokeLinecap="round"
@@ -22,7 +22,7 @@ export const search = (
     viewBox="0 0 24 24"
     strokeWidth={2.0}
     stroke="currentColor"
-    className="size-6"
+    className="size-6 text-black"
   >
     <path
       strokeLinecap="round"
@@ -39,7 +39,7 @@ export const location = (
     viewBox="0 0 24 24"
     strokeWidth={2.0}
     stroke="currentColor"
-    className="size-6"
+    className="size-6 text-black"
   >
     <path
       strokeLinecap="round"
@@ -95,7 +95,7 @@ export const close = (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="size-6"
+    className="size-6 text-black"
   >
     <path
       strokeLinecap="round"

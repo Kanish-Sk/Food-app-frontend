@@ -37,7 +37,7 @@ function Carousel({ slides, onSlideChange }) {
   }, []);
 
   return (
-    <div className="rounded-3xl relative">
+    <div className="rounded-3xl  relative">
       <Swiper
         ref={swiperRef}
         modules={[EffectCoverflow, Navigation, Pagination, Autoplay]}

@@ -5,7 +5,7 @@ import SideBar from "../component/Sidebar";
 import Navbar from "./NavBar";
 import Home from "../../home/page/Home";
 
-const MainNavBar = () => {
+const MainNavBar = ({ toggleDarkMode }) => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
   const openDrawerHandler = () => {
@@ -20,8 +20,8 @@ const MainNavBar = () => {
     <React.Fragment>
       {drawerIsOpen && <BackDrop onClick={closeDrawerHandler} />}
 
-      <div className="flex">
-        <div className="hidden md:block fixed ">
+      <div className="flex relative">
+        <div className="hidden md:block fixed h-screen pb-8">
           <SideBar />
         </div>
         <div className="hidden md:block h-full ml-24">
@@ -29,9 +29,16 @@ const MainNavBar = () => {
             <SideBar />
           </SideDrawer>
         </div>
-        <div className="w-full ">
-          <Navbar onMenuClick={openDrawerHandler} />
-          <Home />
+        <div className="w-full">
+          <div className="sticky top-5 z-50">
+            <Navbar
+              onMenuClick={openDrawerHandler}
+              toggleDarkMode={toggleDarkMode}
+            />
+          </div>
+          <div className="">
+            <Home />
+          </div>
         </div>
       </div>
     </React.Fragment>

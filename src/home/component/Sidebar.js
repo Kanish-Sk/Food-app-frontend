@@ -10,7 +10,7 @@ const SideBar = () => {
   const [activePath, setActivepath] = useState(location.pathname);
 
   return (
-    <nav className="st bg-gray-800 p-5 md:rounded-3xl w-full md:w-max flex flex-col h-screen justify-between">
+    <nav className=" bg-gray-800 p-5 md:rounded-3xl w-full md:w-max flex h-full flex-col justify-between">
       <div>
         <div className="mb-10">
           <div className="flex items-center">
@@ -19,13 +19,13 @@ const SideBar = () => {
               src={Logo}
               alt="Logo"
             />
-            <h1 className="block md:hidden uppercase text-white font-bold">
+            <h1 className="block md:hidden uppercase text-white font-bold text-lg">
               Grab And Go
             </h1>
           </div>
         </div>
 
-        <ul className="flex flex-col items-start md:items-center space-y-5 flex-grow ">
+        <ul className="flex flex-col items-start md:items-center space-y-5 flex-grow">
           {Object.entries(data).map(([key, value]) => (
             <li
               key={key}
@@ -36,13 +36,13 @@ const SideBar = () => {
                 onClick={() => setActivepath(value.path)}
                 className={`group flex items-center ${
                   activePath === value.path
-                    ? "bg-green-500 w-full md:w-11 h-10 p-5 md:h-10 rounded md:rounded-full flex justify-center items-center"
+                    ? "bg-green-600 w-full md:w-11 h-10 p-5 md:h-10 rounded md:rounded-full flex justify-center items-center"
                     : "w-full md:w-11 h-11 md:h-11 rounded-full flex justify-center items-center"
                 }`}
               >
                 <div className="flex items-center">
                   {value.svg}
-                  <span className="text-white text-sm font-medium ml-2 md:z-50 md:absolute md:top-1/2 md:left-full md:transform md:-translate-y-1/2 md:ml-4 md:transition-all md:duration-200 md:ease-in-out md:opacity-0 md:group-hover:opacity-100 md:bg-gray-500 md:rounded-lg md:p-2">
+                  <span className=" text-white text-sm font-medium ml-2 md:z-50 md:absolute cursor-pointer md:cursor-auto md:top-1/2 md:left-full md:transform md:-translate-y-1/2 md:ml-4 md:transition-all md:duration-200 md:ease-in-out md:opacity-0 md:group-hover:opacity-100 md:bg-gray-500 md:rounded-lg md:p-2">
                     {key.charAt(0).toUpperCase() + key.slice(1)}
                   </span>
                 </div>
@@ -52,7 +52,7 @@ const SideBar = () => {
         </ul>
       </div>
 
-      <div className="flex items-center justify-center w-full mb-20 md:mb-0 md:w-auto mt-10 md:mt-auto">
+      <div className="flex text-black items-center  justify-center w-full mb-20 md:mb-0 md:w-auto mt-10 md:mt-auto">
         <Link to={"/"}>
           <div className=" badge btninner md:before:bg-green-400">
             <svg

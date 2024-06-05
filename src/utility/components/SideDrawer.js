@@ -13,7 +13,7 @@ const SideDrawer = (props) => {
       unmountOnExit
     >
       <aside
-        className="fixed left-0 top-0 z-50 w-2/3 h-full bg-white shadow-md shadow-gray-300"
+        className="fixed left-0 top-0 z-50 w-2/3 h-full bg-white shadow-2xl shadow-gray-500"
         onClick={props.onClick}
       >
         {props.children}
