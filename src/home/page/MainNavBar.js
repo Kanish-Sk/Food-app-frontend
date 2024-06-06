@@ -30,15 +30,11 @@ const MainNavBar = ({ toggleDarkMode }) => {
           </SideDrawer>
         </div>
         <div className="w-full">
-          <div className="sticky top-5 z-50">
-            <Navbar
-              onMenuClick={openDrawerHandler}
-              toggleDarkMode={toggleDarkMode}
-            />
-          </div>
-          <div className="">
-            <Home />
-          </div>
+          <Navbar
+            onMenuClick={openDrawerHandler}
+            toggleDarkMode={toggleDarkMode}
+          />
+          <Home />
         </div>
       </div>
     </React.Fragment>

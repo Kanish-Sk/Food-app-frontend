@@ -13,7 +13,7 @@ function App() {
   return (
     <div
       className={`app p-4 relative ${
-        darkMode ? "bg-gray-950 text-gray-200" : "bg-gray-200 text-gray-900"
+        darkMode ? "bg-gray-950 text-gray-200" : "bg-gray-300 text-gray-900"
       } bg-gray-200`}
     >
       <Router>

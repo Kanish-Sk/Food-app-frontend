@@ -42,7 +42,7 @@ const SideBar = () => {
               >
                 <div className="flex items-center">
                   {value.svg}
-                  <span className=" text-white text-sm font-medium ml-2 md:z-50 md:absolute cursor-pointer md:cursor-auto md:top-1/2 md:left-full md:transform md:-translate-y-1/2 md:ml-4 md:transition-all md:duration-200 md:ease-in-out md:opacity-0 md:group-hover:opacity-100 md:bg-gray-500 md:rounded-lg md:p-2">
+                  <span className="text-white text-sm font-medium ml-2 md:absolute cursor-pointer md:cursor-auto md:top-1/2 md:left-full md:transform md:-translate-y-1/2 md:-ml-1 md:transition-all md:duration-200 md:ease-in-out md:opacity-0 md:group-hover:opacity-100 md:bg-gray-500 md:rounded-lg md:p-2 md:text-xs">
                     {key.charAt(0).toUpperCase() + key.slice(1)}
                   </span>
                 </div>

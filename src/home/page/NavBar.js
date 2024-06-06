@@ -18,7 +18,7 @@ const Navbar = ({ onMenuClick, toggleDarkMode }) => {
       >
         {menu}
       </div>
-      <div className="hidden  md:block  ml-2 justify-center uppercase text-2xl font-bold ">
+      <div className="hidden  md:block text-white ml-2 justify-center uppercase text-2xl font-bold ">
         <div>Grab And Go</div>
       </div>
       <div className="flex justify-end items-center gap-5 grow">

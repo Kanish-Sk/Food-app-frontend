@@ -14,7 +14,7 @@ const CarouselWrapper = ({ props }) => {
   console.log(currentSlide.body[1]);
 
   return (
-    <div className="md:flex bg-gray-800 rounded-3xl w-full">
+    <div className="md:flex bg-gray-800 rounded-3xl w-full z-10">
       <div className=" md:w-1/2 p-2  md:p-4">
         <Carousel slides={props} onSlideChange={updateCurrentSlideIndex} />
       </div>

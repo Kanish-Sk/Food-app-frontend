@@ -1,9 +1,10 @@
 .swiper {
-  width: 100%;
+  width: 95%;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 .swiper-wrapper {
   margin: 0;
@@ -52,7 +53,7 @@ img {
   z-index: 3;
 }
 :is(.button-next, .button-prev):hover {
-  background-color: rgba(20, 175, 175, 0.2);
+  background-color: rgba(177, 219, 219, 0.2);
 }
 
 .button-next {
@@ -91,6 +92,6 @@ img {
   }
 
   .swiper {
-    --swiper-pagination-bullet-inactive-color: rgb(8, 8, 8);
+    --swiper-pagination-bullet-inactive-color: rgb(149, 130, 130);
   }
 }
