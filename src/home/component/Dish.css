@@ -1,0 +1,24 @@
+.card-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.card-container img {
+  transition: filter 0.5s ease;
+}
+
+.card-container .blur-md {
+  filter: blur(10px);
+}
+
+.card-container .content-overlay {
+  transition: opacity 0.5s ease;
+}
+
+.card-container .show-content {
+  opacity: 1;
+}
+
+.card-container .hide-content {
+  opacity: 0;
+}

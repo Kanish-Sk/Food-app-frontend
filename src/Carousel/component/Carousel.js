@@ -10,9 +10,9 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "./carousel.css";
-import arrowLeft from "./assets/arrow-left.svg";
-import arrowRight from "./assets/arrow-right.svg";
+import "./Carousel.css";
+import arrowLeft from "../assets/arrow-left.svg";
+import arrowRight from "../assets/arrow-right.svg";
 
 function Carousel({ slides, onSlideChange }) {
   const swiperRef = useRef(null);
@@ -67,7 +67,7 @@ function Carousel({ slides, onSlideChange }) {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index} className="slide-inner">
-            <img src={slide.image} alt={slide.header} className="rounded-xl" />
+            <img src={slide.image} alt={slide.name} className="rounded-xl" />
           </SwiperSlide>
         ))}
       </Swiper>

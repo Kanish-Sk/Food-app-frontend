@@ -10,7 +10,7 @@ const SideBar = () => {
   const [activePath, setActivepath] = useState(location.pathname);
 
   return (
-    <nav className=" bg-gray-800 p-5 md:rounded-3xl w-full md:w-max flex h-full flex-col justify-between">
+    <nav className="bg-gray-800 p-5 md:rounded-3xl w-full md:w-max flex h-full flex-col justify-between">
       <div>
         <div className="mb-10">
           <div className="flex items-center">
