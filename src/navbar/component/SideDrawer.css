@@ -4,7 +4,7 @@
 
 .slide-in-out-enter-active {
   transform: translateX(0);
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.7s ease-in-out;
 }
 
 .slide-in-out-exit {
@@ -13,5 +13,5 @@
 
 .slide-in-out-exit-active {
   transform: translateX(100%);
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }

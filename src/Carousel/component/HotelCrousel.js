@@ -21,7 +21,7 @@ const HotelCarousel = ({ props }) => {
   };
 
   return (
-    <div className="md:flex bg-gray-800 rounded-3xl w-full z-10">
+    <div className="md:flex bg-gray-800 rounded-3xl w-full -z-[-100px]">
       <div className="md:w-1/2 p-2 md:p-4">
         <Carousel slides={props} onSlideChange={updateCurrentSlideIndex} />
       </div>
@@ -43,7 +43,7 @@ const HotelCarousel = ({ props }) => {
           </div>
           <button
             onClick={handleViewHotel}
-            className="mt-3 md:mt-10 text-sm md:text-base font-serif uppercase text-gray-200 font-bold bg-green-600 rounded-lg px-3 md:px-4 py-2 hover:shadow-xl hover:shadow-black transition ease-in-out duration-200"
+            className="mt-3 md:mt-10 text-sm md:text-base font-serif uppercase text-gray-200 font-bold bg-green-600 rounded-lg px-3 md:px-4 py-2 transition ease-in-out duration-200 hover:translate-y-[-0.25rem]"
           >
             view
           </button>

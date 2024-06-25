@@ -9,6 +9,10 @@ import SideDrawer from "./navbar/component/SideDrawer";
 import HotelDetails from "./home/page/HotelDetails";
 import Footer from "./footer/Footer";
 
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import { UserProvider } from "./utility/context/UserContext";
+import { ToastContainer } from "react-toastify";
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -27,46 +31,58 @@ function App() {
   };
 
   return (
-    <Router>
-      <div
-        className={`p-4 font-body relative ${
-          darkMode ? "bg-gray-950 text-gray-200" : "bg-gray-300 text-gray-900"
-        } bg-gray-200`}
-      >
-        {drawerIsOpen && <BackDrop onClick={closeDrawerHandler} />}
+    <UserProvider>
+      <Router>
+        <div
+          className={`flex flex-col min-h-screen px-4 pb-4 font-body ${
+            darkMode ? "bg-gray-950 text-gray-200" : "bg-gray-300 text-gray-900"
+          }`}
+        >
+          {drawerIsOpen && <BackDrop onClick={closeDrawerHandler} />}
 
-        <div className="flex relative">
-          <div className="hidden md:block fixed h-screen pb-8">
-            <SideBar />
-          </div>
-          <div className="hidden md:block h-full ml-24">
-            <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}>
-              <SideBar />
-            </SideDrawer>
-          </div>
-          <div className="w-full">
-            <TopNavbar
-              onMenuClick={openDrawerHandler}
-              toggleDarkMode={toggleDarkMode}
-            />
+          <div className="flex">
+            <div className="z-50">
+              <div className="hidden md:block fixed h-screen pb-8">
+                <SideBar />
+              </div>
+              <div className="hidden md:block h-full ml-24">
+                <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}>
+                  <SideBar />
+                </SideDrawer>
+              </div>
+            </div>
+            <div className="w-full flex flex-col">
+              <div className="sticky bg-gray-300 top-0 z-10 h-24 flex items-center w-full">
+                <TopNavbar
+                  onMenuClick={openDrawerHandler}
+                  toggleDarkMode={toggleDarkMode}
+                />
+              </div>
 
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/account" element={<Account />} />
-              <Route path="/:hotelname/dishes" element={<HotelDetails />} />
-            </Routes>
+              <div className="relative">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/account" element={<Account />} />
+                  <Route path="/:hotelname/dishes" element={<HotelDetails />} />
+                </Routes>
+              </div>
 
-            <div
-              className={` font-body relative ${
-                darkMode ? "bg-gray-950" : "bg-gray-300"
-              } bg-gray-200`}
-            >
               <Footer />
             </div>
           </div>
         </div>
-      </div>
-    </Router>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </Router>
+    </UserProvider>
   );
 }
 

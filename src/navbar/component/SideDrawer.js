@@ -7,13 +7,13 @@ const SideDrawer = (props) => {
   const content = (
     <CSSTransition
       in={props.show}
-      timeout={200}
-      classNames="slide-in-out"
+      timeout={50}
+      classNames="slide-in-left transiton ease-in-out duration-500"
       mountOnEnter
       unmountOnExit
     >
       <aside
-        className="fixed left-0 top-0 z-50 w-2/3 h-full bg-white shadow-2xl shadow-gray-500"
+        className="fixed left-0 top-0 z-50 w-2/3 h-full bg-white shadow-lg shadow-gray-500"
         onClick={props.onClick}
       >
         {props.children}

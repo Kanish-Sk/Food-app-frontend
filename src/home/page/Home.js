@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import HotelCard from "../component/HotelCard";
 import Loading from "../../utility/components/Loading";
 import { hotelsDetails, topDishes } from "./HomeData";
+
+import HomeSearchResult from "../component/HomeSearchResult";
 import HotelCarousel from "../../Carousel/component/HotelCrousel";
 import DishCarousel from "../../Carousel/component/DishCarousel";
 
@@ -12,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchHotels = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setHotels(hotelsDetails);
       setDishes(topDishes);
       setIsLoading(false);
@@ -29,6 +31,8 @@ const Home = () => {
         </div>
       ) : (
         <>
+          <HomeSearchResult />
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-1 pr-0 ">
               <h1 className=" text-lg mb-2 md:text-xl md:mb-4 font-bold justify-center flex">

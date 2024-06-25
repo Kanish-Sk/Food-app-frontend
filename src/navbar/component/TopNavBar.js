@@ -13,7 +13,7 @@ const Navbar = ({ onMenuClick, toggleDarkMode }) => {
   };
 
   return (
-    <div className="md:mt-1 p-4 flex items-center bg-gray-800 rounded-2xl mb-3">
+    <div className="p-4 flex items-center bg-gray-800 rounded-2xl w-full">
       <div
         className="flex justify-center text-white items-center"
         onClick={onMenuClick}
@@ -24,11 +24,9 @@ const Navbar = ({ onMenuClick, toggleDarkMode }) => {
         <div>Grab And Go</div>
       </div>
       <div className="flex justify-end items-center gap-5 grow">
-        {locationPath === "/" && (
-          <div className="border-white bg-white rounded-md p-2">
-            <SearchBar />
-          </div>
-        )}
+        <div className="border-white bg-white rounded-md p-2">
+          <SearchBar />
+        </div>
         {locationPath === "/" && (
           <div className="border-white bg-white rounded-md p-2 hover:shadow-md hover:shadow-black cursor-pointer">
             {location}

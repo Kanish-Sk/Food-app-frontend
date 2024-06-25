@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Carousel from "../component/Carousel";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -47,7 +47,6 @@ const DishCarousel = ({ props }) => {
           </button>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

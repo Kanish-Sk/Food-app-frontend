@@ -1,16 +1,22 @@
 import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Logo from "../../utility/images/Grab.png";
 import { data } from "./SideBarData";
-import { useState } from "react";
-
 import "../../utility/styles/buttonStyle.css";
 
 const SideBar = () => {
   const location = useLocation();
   const [activePath, setActivepath] = useState(location.pathname);
 
+  useEffect(() => {
+    setActivepath(location.pathname);
+  }, [location.pathname]);
+
   return (
-    <nav className="bg-gray-800 p-5 md:rounded-3xl w-full md:w-max flex h-full flex-col justify-between">
+    <nav
+      className="bg-gray-800 p-5 md:rounded-3xl w-full md:w-max flex h-full flex-col justify-between"
+      style={{ zIndex: 1000 }}
+    >
       <div>
         <div className="mb-10">
           <div className="flex items-center">
@@ -25,7 +31,7 @@ const SideBar = () => {
           </div>
         </div>
 
-        <ul className="flex flex-col items-start md:items-center space-y-5 flex-grow">
+        <div className="flex flex-col items-start md:items-center space-y-5 flex-grow z-10">
           {Object.entries(data).map(([key, value]) => (
             <li
               key={key}
@@ -40,21 +46,21 @@ const SideBar = () => {
                     : "w-full md:w-11 h-11 md:h-11 rounded-full flex justify-center items-center"
                 }`}
               >
-                <div className="flex items-center">
+                <div className="flex items-center z-[1000px]">
                   {value.svg}
-                  <span className="text-white text-sm font-medium ml-2 md:absolute cursor-pointer md:cursor-auto md:top-1/2 md:left-full md:transform md:-translate-y-1/2 md:-ml-1 md:transition-all md:duration-200 md:ease-in-out md:opacity-0 md:group-hover:opacity-100 md:bg-gray-500 md:rounded-lg md:p-2 md:text-xs">
+                  <span className="text-white text-sm font-medium ml-2 md:absolute cursor-pointer md:cursor-auto md:top-1/2 md:left-full md:transform md:-translate-y-1/2 md:ml-5 md:transition-all md:duration-200 md:ease-in-out md:opacity-0 md:group-hover:opacity-100 md:bg-gray-500 md:rounded-lg md:p-2 md:text-xs">
                     {key.charAt(0).toUpperCase() + key.slice(1)}
                   </span>
                 </div>
               </Link>
             </li>
           ))}
-        </ul>
+        </div>
       </div>
 
-      <div className="flex text-black items-center  justify-center w-full mb-20 md:mb-0 md:w-auto mt-10 md:mt-auto">
+      <div className="flex text-black items-center justify-center w-full mb-20 md:mb-0 md:w-auto mt-10 md:mt-auto">
         <Link to={"/"}>
-          <div className=" badge btninner md:before:bg-green-400">
+          <div className="badge btninner border-2 bg-black md:before:bg-green-400">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

@@ -1,19 +1,30 @@
-import { Link } from "react-router-dom";
-import "../utility/styles/buttonStyle.css";
-
-import { socailMediaIcons } from "./FooterIcon";
+import "./footer.css";
 
 const Footer = () => {
   return (
-    <div className="bg-gray-800 w-full h-16 md:h-20 rounded-2xl p-2 flex items-center justify-around md:justify-center">
-      {socailMediaIcons.map((icon) => (
-        <Link
-          to={icon.link}
-          className="cursor-pointer bg-white rounded-full p-2 ml-0 mr-0 md:ml-4 md:mr-4"
-        >
-          {icon.svg}
-        </Link>
-      ))}
+    <div className="bg-gray-800 w-full h-16 md:h-20 rounded-2xl p-2 flex items-center justify-center bottom-0">
+      <ul>
+        <li className="item">
+          <a href="#">
+            <i className="fas fa-envelope logo"></i>
+          </a>
+        </li>
+        <li className="item">
+          <a href="#">
+            <i className="fab fa-instagram logo"></i>
+          </a>
+        </li>
+        <li className="item">
+          <a href="#">
+            <i className="fab fa-linkedin logo"></i>
+          </a>
+        </li>
+        <li className="item">
+          <a href="#">
+            <i class="fa-brands fa-x-twitter logo"></i>
+          </a>
+        </li>
+      </ul>
     </div>
   );
 };

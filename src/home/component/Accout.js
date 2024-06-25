@@ -1,7 +1,7 @@
 const Account = () => {
   return (
     <div>
-      <div>Account</div>
+      <div className="h-screen borrder-2 border-red-500">Account</div>
     </div>
   );
 };
