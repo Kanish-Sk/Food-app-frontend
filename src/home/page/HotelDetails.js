@@ -33,7 +33,7 @@ const HotelDetails = () => {
         </div>
       </div>
 
-      <div className="bg-white shadow-md -mt-6 relative z-10 mx-4 rounded-lg overflow-hidden">
+      <div className="bg-white shadow-md -mt-6 relative mx-4 rounded-lg overflow-hidden">
         <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
           <div className="p-4 sm:p-6">
             <h3 className="text-lg font-semibold mb-2">Contact</h3>
@@ -60,7 +60,7 @@ const HotelDetails = () => {
             No dishes found matching your search.
           </p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {filteredDishes.map((dish) => (
               <Dish key={dish.id} dish={dish} />
             ))}

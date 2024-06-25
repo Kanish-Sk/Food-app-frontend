@@ -7,10 +7,8 @@ const Dish = ({ dish }) => {
   const [blurred, setBlurred] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
 
-  const handleOrder = useCallback((e) => {
-    e.stopPropagation();
+  const handleOrder = useCallback(() => {
     toast.success("Order Placed Successfully!");
-    setBlurred((prevBlurred) => !prevBlurred);
   }, []);
 
   const handleBlur = useCallback(() => {
