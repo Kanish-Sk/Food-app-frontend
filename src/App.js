@@ -1,6 +1,6 @@
 import Account from "./home/component/Accout";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Home from "./home/page/Home";
 import BackDrop from "./utility/components/Backdrop";
 import SideBar from "./navbar/component/Sidebar";
@@ -10,20 +10,17 @@ import HotelDetails from "./home/page/HotelDetails";
 import Footer from "./footer/Footer";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { UserProvider } from "./utility/context/UserContext";
+import { UserContext, UserProvider } from "./utility/context/UserContext";
 import { ToastContainer } from "react-toastify";
+import Login from "./Auth/Login";
 
-function App() {
+const App = () => {
+  const { username } = useContext(UserContext);
   const [darkMode, setDarkMode] = useState(false);
-
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
-  const openDrawerHandler = () => {
-    setDrawerIsOpen(true);
-  };
-
-  const closeDrawerHandler = () => {
-    setDrawerIsOpen(false);
+  const toggleDrawerHandler = () => {
+    setDrawerIsOpen(!drawerIsOpen);
   };
 
   const toggleDarkMode = () => {
@@ -35,27 +32,32 @@ function App() {
       <Router>
         <div
           className={`flex flex-col min-h-screen px-4 pb-4 font-body ${
-            darkMode ? "bg-gray-950 text-gray-200" : "bg-gray-300 text-gray-900"
-          }`}
+            darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+          } ${!username ? "blur-md" : ""}`}
         >
-          {drawerIsOpen && <BackDrop onClick={closeDrawerHandler} />}
+          {drawerIsOpen && <BackDrop onClick={toggleDrawerHandler} />}
 
           <div className="flex">
             <div className="z-50">
-              <div className="hidden md:block fixed h-screen pb-8">
+              <div className="hidden md:block mt-3 fixed h-screen pb-8">
                 <SideBar />
               </div>
               <div className="hidden md:block h-full ml-24">
-                <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}>
+                <SideDrawer show={drawerIsOpen} onClick={toggleDrawerHandler}>
                   <SideBar />
                 </SideDrawer>
               </div>
             </div>
             <div className="w-full flex flex-col">
-              <div className="sticky bg-gray-300 top-0 z-10 h-24 flex items-center w-full">
+              <div
+                className={`sticky z-10 top-0 h-24 flex items-center w-full ${
+                  darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+                }`}
+              >
                 <TopNavbar
-                  onMenuClick={openDrawerHandler}
+                  toggleDrawerHandler={toggleDrawerHandler}
                   toggleDarkMode={toggleDarkMode}
+                  darkMode={darkMode}
                 />
               </div>
 
@@ -71,6 +73,7 @@ function App() {
             </div>
           </div>
         </div>
+        {!username && <Login />}
         <ToastContainer
           position="top-right"
           autoClose={3000}
@@ -84,6 +87,6 @@ function App() {
       </Router>
     </UserProvider>
   );
-}
+};
 
 export default App;

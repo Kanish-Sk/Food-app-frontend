@@ -1,22 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { menu, location, moon, sun } from "../../utility/svg/icons";
 import SearchBar from "./SearchBar";
 
-const Navbar = ({ onMenuClick, toggleDarkMode }) => {
-  const [theme, setTheme] = useState("light");
+const Navbar = ({ toggleDrawerHandler, toggleDarkMode, darkMode }) => {
+  const [, setTheme] = useState("light");
   const locationPath = useLocation().pathname;
 
+  useEffect(() => {
+    setTheme(darkMode ? "dark" : "light");
+  }, [darkMode]);
+
   const handleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
     toggleDarkMode();
   };
 
   return (
-    <div className="p-4 flex items-center bg-gray-800 rounded-2xl w-full">
+    <div
+      className="p-4 bg-gray-800 flex items-center 
+      } rounded-2xl w-full"
+    >
       <div
         className="flex justify-center text-white items-center"
-        onClick={onMenuClick}
+        onClick={toggleDrawerHandler}
       >
         {menu}
       </div>
@@ -36,30 +42,22 @@ const Navbar = ({ onMenuClick, toggleDarkMode }) => {
         <div
           onClick={handleTheme}
           className={`hidden md:flex p-3 gap-5 rounded-full ${
-            theme === "light" ? "bg-white" : "bg-black"
+            darkMode ? "bg-black" : "bg-white"
           } transition ease-in-out duration-500 cursor-pointer`}
         >
-          <div className="text-white ">{moon}</div>
-          <div
-            className={`${
-              theme === "light" ? "text-yellow-400 " : "text-black "
-            }`}
-          >
+          <div className={`text-white`}>{moon}</div>
+          <div className={`${darkMode ? "text-black" : "text-yellow-400"}`}>
             {sun}
           </div>
         </div>
         <div
           onClick={handleTheme}
           className={`sm:block md:hidden p-3 rounded-full ${
-            theme === "light" ? "bg-white" : "bg-black"
+            darkMode ? "bg-black" : "bg-white"
           } transition ease-in-out duration-500 cursor-pointer`}
         >
-          <div className={`${theme === "dark" ? "text-white " : "hidden "}`}>
-            {moon}
-          </div>
-          <div
-            className={`${theme === "light" ? "text-yellow-400 " : "hidden "}`}
-          >
+          <div className={`${darkMode ? "text-white" : "hidden"}`}>{moon}</div>
+          <div className={`${darkMode ? "hidden" : "text-yellow-400"}`}>
             {sun}
           </div>
         </div>

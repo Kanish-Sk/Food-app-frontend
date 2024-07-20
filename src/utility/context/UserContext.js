@@ -1,11 +1,19 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
-export const UserContext = createContext();
+// Create a context with default values
+export const UserContext = createContext({
+  username: "",
+  setUsername: () => {},
+  theme: null,
+  setTheme: () => {},
+  searchQuery: null,
+  setSearchQuery: () => {},
+});
 
 export const UserProvider = ({ children }) => {
-  const [username, setUsername] = useState("");
-  const [theme, setTheme] = useState("light");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [username, setUsername] = useState(null);
+  const [theme, setTheme] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(null);
 
   return (
     <UserContext.Provider
