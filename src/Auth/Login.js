@@ -81,8 +81,8 @@ const Login = ({ setIsLogin, setUsername }) => {
     switch (mode) {
       case "login":
         if (
-          inputValues.username == "kanish" &&
-          inputValues.password == "1234"
+          inputValues.username === "kanish" &&
+          inputValues.password === "1234"
         ) {
           setUsername(inputValues.username);
           setIsLogin(true);
