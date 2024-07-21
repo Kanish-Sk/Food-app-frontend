@@ -15,9 +15,10 @@ import { ToastContainer } from "react-toastify";
 import Login from "./Auth/Login";
 
 const App = () => {
-  const { username } = useContext(UserContext);
+  const { username, setUsername } = useContext(UserContext);
   const [darkMode, setDarkMode] = useState(false);
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+  const [islogin, setIsLogin] = useState(false);
 
   const toggleDrawerHandler = () => {
     setDrawerIsOpen(!drawerIsOpen);
@@ -32,26 +33,31 @@ const App = () => {
       <Router>
         <div
           className={`flex flex-col min-h-screen px-4 pb-4 font-body ${
-            darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
-          } ${!username ? "blur-md" : ""}`}
+            darkMode ? "bg-gray-900 text-gray-300" : "bg-gray-300 text-gray-900"
+          } ${!username && !islogin ? "blur-md" : ""}`}
         >
-          {drawerIsOpen && <BackDrop onClick={toggleDrawerHandler} />}
+          {/* Show backdrop only if the user is not logged in and sidebar is open */}
+          {!islogin && drawerIsOpen && (
+            <BackDrop onClick={toggleDrawerHandler} />
+          )}
 
           <div className="flex">
             <div className="z-50">
               <div className="hidden md:block mt-3 fixed h-screen pb-8">
-                <SideBar />
+                <SideBar setIsLogin={setIsLogin} setUsername={setUsername} />
               </div>
               <div className="hidden md:block h-full ml-24">
                 <SideDrawer show={drawerIsOpen} onClick={toggleDrawerHandler}>
-                  <SideBar />
+                  <SideBar setIsLogin={setIsLogin} setUsername={setUsername} />
                 </SideDrawer>
               </div>
             </div>
             <div className="w-full flex flex-col">
               <div
                 className={`sticky z-10 top-0 h-24 flex items-center w-full ${
-                  darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+                  darkMode
+                    ? "bg-gray-900 text-gray-300"
+                    : "bg-gray-300 text-gray-900"
                 }`}
               >
                 <TopNavbar
@@ -73,7 +79,9 @@ const App = () => {
             </div>
           </div>
         </div>
-        {!username && <Login />}
+        {!islogin && (
+          <Login setIsLogin={setIsLogin} setUsername={setUsername} />
+        )}
         <ToastContainer
           position="top-right"
           autoClose={3000}

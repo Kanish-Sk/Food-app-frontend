@@ -3,10 +3,17 @@ import { useState, useEffect } from "react";
 import Logo from "../../utility/images/Grab.png";
 import { data } from "./SideBarData";
 import "../../utility/styles/buttonStyle.css";
+import { toast } from "react-toastify";
 
-const SideBar = () => {
+const SideBar = ({ setIsLogin, setUsername }) => {
   const location = useLocation();
   const [activePath, setActivepath] = useState(location.pathname);
+
+  const handleLoggout = () => {
+    setUsername("");
+    setIsLogin(false);
+    toast.success("Loggout succesfully.");
+  };
 
   useEffect(() => {
     setActivepath(location.pathname);
@@ -59,7 +66,7 @@ const SideBar = () => {
       </div>
 
       <div className="flex text-black items-center justify-center w-full mb-20 md:mb-0 md:w-auto mt-10 md:mt-auto">
-        <Link to={"/"}>
+        <Link onClick={handleLoggout}>
           <div className="badge btninner border-2 bg-black md:before:bg-green-400">
             <svg
               xmlns="http://www.w3.org/2000/svg"

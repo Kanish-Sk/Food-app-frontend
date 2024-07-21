@@ -1,15 +1,10 @@
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../utility/context/UserContext";
-import { toast, ToastContainer } from "react-toastify";
+import { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const Login = () => {
-  const { setUsername } = useContext(UserContext);
-  const [, setIsSignUp] = useState(false);
+const Login = ({ setIsLogin, setUsername }) => {
   const [error, setError] = useState(true);
   const [mode, setMode] = useState("login"); // 'login', 'register', 'forgotPassword', 'verifyEmail'
-  const navigate = useNavigate();
   const [inputValues, setInputValues] = useState({
     username: "",
     password: "",
@@ -17,6 +12,7 @@ const Login = () => {
     verificationCode: "",
     newPassword: "",
   });
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
 
   const [isTouch, setIsTouch] = useState({
     username: false,
@@ -69,30 +65,67 @@ const Login = () => {
     const allFieldsFilled = requiredFields.every(
       (field) => inputValues[field].trim() !== ""
     );
-    setError(!allFieldsFilled);
-  }, [inputValues, mode]);
+
+    const isValid =
+      allFieldsFilled &&
+      (mode !== "register" ||
+        (isEmailVerified &&
+          inputValues.username.length >= 4 &&
+          inputValues.password.length >= 6));
+
+    setError(!isValid);
+  }, [inputValues, mode, isEmailVerified]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     switch (mode) {
       case "login":
-        setUsername(inputValues.username);
-        toast.success("Logged in successfully");
-        navigate("/");
-
+        if (
+          inputValues.username == "kanish" &&
+          inputValues.password == "1234"
+        ) {
+          setUsername(inputValues.username);
+          setIsLogin(true);
+          toast.success("Logged in successfully");
+        } else {
+          toast.error("Invalid username or password");
+        }
         break;
       case "register":
-        toast.success("Register successfully");
-        setMode(Login);
+        if (inputValues.username.length < 4) {
+          toast.error("Username must be at least 4 characters long");
+          return;
+        }
+        if (inputValues.password.length < 6) {
+          toast.error("Password must be at least 6 characters long");
+          return;
+        }
+        if (!isEmailVerified) {
+          toast.error("Please verify your email before registering");
+          return;
+        }
+        toast.success("Registered successfully");
+        setMode("login");
         break;
       case "forgotPassword":
-        // Handle forgot password logic here
         toast.success("Password reset successfully");
         setMode("login");
         break;
       default:
         break;
     }
+  };
+
+  const handleGoogle = () => {
+    setUsername("Google login");
+    setIsLogin(true);
+    toast.success("Logged in through Google");
+  };
+
+  const handleGitHub = () => {
+    setUsername("Github login");
+    setIsLogin(true);
+    toast.success("Logged in through GitHub");
   };
 
   const toggleMode = (newMode) => {
@@ -123,12 +156,22 @@ const Login = () => {
     });
 
     setError(true);
-    setIsSignUp(newMode === "register");
+    setIsEmailVerified(false);
   };
 
   const handleVerifyEmail = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(inputValues.email)) {
+      toast.error("Invalid email format");
+      return;
+    }
     // Mock email verification process
     toast.info("Verification link sent to your email");
+    // Simulating email verification after 2 seconds
+    setTimeout(() => {
+      setIsEmailVerified(true);
+      toast.success("Email verified successfully");
+    }, 2000);
   };
 
   const renderInput = (field, type = "text") => (
@@ -157,8 +200,8 @@ const Login = () => {
         htmlFor={field}
         className={`absolute left-4 transition-all duration-300
          ${
-           isTouch[field]
-             ? "transform -translate-y-12 -left-2 text-xl scale-75 top-4"
+           isTouch[field] || inputValues[field]
+             ? "transform -translate-y-12 -left-2.5 text-xl scale-75 top-4"
              : "text-gray-400 top-3"
          } 
           ${
@@ -177,7 +220,6 @@ const Login = () => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 backdrop-blur-sm">
-      <ToastContainer />
       <div className="bg-gray-900 rounded-lg p-8 shadow-2xl w-10/12 max-w-md md:w-full space-y-8">
         <div className="flex justify-center md:justify-between space-x-4 mb-5">
           <button
@@ -203,26 +245,33 @@ const Login = () => {
             <>
               {renderInput("username")}
               {renderInput("password", "password")}
-              <button
-                onClick={() => toggleMode("forgotPassword")}
-                className=" text-blue-400 text-sm w-full flex justify-end hover:underline"
-              >
-                Forgot Password?
-              </button>
+              <p className="w-full flex justify-end">
+                <button
+                  onClick={() => toggleMode("forgotPassword")}
+                  className=" text-blue-400 text-sm hover:underline"
+                >
+                  Forgot Password?
+                </button>
+              </p>
             </>
           )}
 
           {mode === "register" && (
             <>
               {renderInput("username")}
-              {renderInput("email", "email")}
-              <button
-                onClick={handleVerifyEmail}
-                type="button"
-                className="text-blue-400 text-sm w-full flex justify-end mt-5 hover:underline"
-              >
-                Verify Email?
-              </button>
+              {renderInput("Email", "email")}
+              <p className="w-full flex justify-end">
+                <button
+                  onClick={handleVerifyEmail}
+                  type="button"
+                  className={`text-blue-400 text-sm  hover:underline ${
+                    isEmailVerified ? "text-green-400" : ""
+                  }`}
+                >
+                  {isEmailVerified ? "Email Verified" : "Verify Email"}
+                </button>
+              </p>
+
               {renderInput("password", "password")}
             </>
           )}
@@ -262,7 +311,10 @@ const Login = () => {
               <div className="flex-grow bg-white h-0.5"></div>
             </div>
             <div className="mt-4 flex space-x-2">
-              <button className="w-full bg-gray-100 text-white py-2 rounded-md hover:bg-gray-300 flex items-center justify-center">
+              <button
+                onClick={handleGoogle}
+                className="w-full bg-gray-100 text-white py-2 rounded-md hover:bg-gray-300 flex items-center justify-center"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
@@ -293,7 +345,10 @@ const Login = () => {
                   Google
                 </span>
               </button>
-              <button className="w-full bg-gray-100 text-white py-2 rounded-md hover:bg-gray-300 flex items-center justify-center">
+              <button
+                onClick={handleGitHub}
+                className="w-full bg-gray-100 text-white py-2 rounded-md hover:bg-gray-300 flex items-center justify-center"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
