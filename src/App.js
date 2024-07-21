@@ -1,6 +1,6 @@
 import Account from "./home/component/Accout";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Home from "./home/page/Home";
 import BackDrop from "./utility/components/Backdrop";
 import SideBar from "./navbar/component/Sidebar";
@@ -28,6 +28,20 @@ const App = () => {
     setDarkMode(!darkMode);
   };
 
+  const handleResize = () => {
+    if (window.innerWidth >= 768) {
+      // 768px is typically the 'md' breakpoint in Tailwind
+      setDrawerIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <UserProvider>
       <Router>
@@ -37,10 +51,10 @@ const App = () => {
           } ${!username && !islogin ? "blur-md" : ""}`}
         >
           {/* Show backdrop only if the user is not logged in and sidebar is open */}
-          {!islogin && drawerIsOpen && (
+
+          {(!islogin || (drawerIsOpen && window.innerWidth < 768)) && (
             <BackDrop onClick={toggleDrawerHandler} />
           )}
-
           <div className="flex">
             <div className="z-50">
               <div className="hidden md:block mt-3 fixed h-screen pb-8">
