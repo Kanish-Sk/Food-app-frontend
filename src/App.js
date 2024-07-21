@@ -30,17 +30,31 @@ const App = () => {
 
   const handleResize = () => {
     if (window.innerWidth >= 768) {
-      // 768px is typically the 'md' breakpoint in Tailwind
       setDrawerIsOpen(false);
     }
   };
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
+    handleResize(); // Check the size initially
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (!islogin) {
+      document.body.style.overflow = "hidden";
+      document.body.style.height = "100vh";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.height = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+    }
+  }, [islogin]);
 
   return (
     <UserProvider>
@@ -48,13 +62,12 @@ const App = () => {
         <div
           className={`flex flex-col min-h-screen px-4 pb-4 font-body ${
             darkMode ? "bg-gray-900 text-gray-300" : "bg-gray-300 text-gray-900"
-          } ${!username && !islogin ? "blur-md" : ""}`}
+          } ${!username && !islogin ? "blur-xl" : ""}`}
         >
-          {/* Show backdrop only if the user is not logged in and sidebar is open */}
-
-          {(!islogin || (drawerIsOpen && window.innerWidth < 768)) && (
+          {(!islogin || drawerIsOpen) && (
             <BackDrop onClick={toggleDrawerHandler} />
           )}
+
           <div className="flex">
             <div className="z-50">
               <div className="hidden md:block mt-3 fixed h-screen pb-8">
