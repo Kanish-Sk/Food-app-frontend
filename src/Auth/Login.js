@@ -162,7 +162,6 @@ const Login = ({ setIsLogin, setUsername }) => {
   const handleVerifyEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const trimmedEmail = inputValues.email.trim();
-    console.log("EmailID", inputValues.email);
 
     if (!emailRegex.test(trimmedEmail)) {
       toast.error("Invalid email format");
