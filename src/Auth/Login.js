@@ -161,7 +161,10 @@ const Login = ({ setIsLogin, setUsername }) => {
 
   const handleVerifyEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(inputValues.email)) {
+    const trimmedEmail = inputValues.email.trim();
+    console.log("EmailID", inputValues.email);
+
+    if (!emailRegex.test(trimmedEmail)) {
       toast.error("Invalid email format");
       return;
     }
@@ -201,7 +204,7 @@ const Login = ({ setIsLogin, setUsername }) => {
         className={`absolute left-4 transition-all duration-300
          ${
            isTouch[field] || inputValues[field]
-             ? "transform -translate-y-12 -left-2.5 text-xl scale-75 top-4"
+             ? "transform -translate-y-12 -left-3.5 text-xl scale-75 top-4"
              : "text-gray-400 top-3"
          } 
           ${
@@ -259,7 +262,7 @@ const Login = ({ setIsLogin, setUsername }) => {
           {mode === "register" && (
             <>
               {renderInput("username")}
-              {renderInput("Email", "email")}
+              {renderInput("email", "email")}
               <p className="w-full flex justify-end">
                 <button
                   onClick={handleVerifyEmail}
