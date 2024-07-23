@@ -221,7 +221,7 @@ const Login = ({ setIsLogin, setUsername }) => {
   );
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 backdrop-blur-sm">
+    <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="bg-gray-900 rounded-lg p-8 shadow-2xl w-10/12 max-w-md md:w-full space-y-8">
         <div className="flex justify-center md:justify-between space-x-4 mb-5">
           <button

@@ -1,4 +1,4 @@
-import Account from "./home/component/Accout";
+import Account from "./Account/page/Accout";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Home from "./home/page/Home";
@@ -6,13 +6,15 @@ import BackDrop from "./utility/components/Backdrop";
 import SideBar from "./navbar/component/Sidebar";
 import TopNavbar from "./navbar/component/TopNavBar";
 import SideDrawer from "./navbar/component/SideDrawer";
-import HotelDetails from "./home/page/HotelDetails";
+import HotelDetails from "./hotel/page/HotelDetails";
 import Footer from "./footer/Footer";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { UserContext, UserProvider } from "./utility/context/UserContext";
 import { ToastContainer } from "react-toastify";
-import Login from "./Auth/Login";
+import Profile from "./Proflie/Profile";
+import Order from "./Orders/page/Order";
+import AuthPage from "./Auth/page/Auth";
 
 const App = () => {
   const { username, setUsername } = useContext(UserContext);
@@ -97,6 +99,8 @@ const App = () => {
               <div className="relative">
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/order" element={<Order />} />
                   <Route path="/account" element={<Account />} />
                   <Route path="/:hotelname/dishes" element={<HotelDetails />} />
                 </Routes>
@@ -107,7 +111,7 @@ const App = () => {
           </div>
         </div>
         {!islogin && (
-          <Login setIsLogin={setIsLogin} setUsername={setUsername} />
+          <AuthPage setIsLogin={setIsLogin} setUsername={setUsername} />
         )}
         <ToastContainer
           position="top-right"

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../utility/context/UserContext";
-import { hotelsDetails } from "../page/HomeData";
+import { hotelsDetails } from "../../utility/data/HomeData";
 import HotelCard from "./HotelCard";
-import Dish from "./Dish";
+import Dish from "../../hotel/component/Dish";
 
 const HomeSearchResult = () => {
   const { searchQuery } = useContext(UserContext);

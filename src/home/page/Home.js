@@ -1,27 +1,44 @@
 import React, { useEffect, useState } from "react";
 import HotelCard from "../component/HotelCard";
 import Loading from "../../utility/components/Loading";
-import { hotelsDetails, topDishes } from "./HomeData";
+import { hotelsDetails, topDishes } from "../../utility/data/HomeData";
 
 import HomeSearchResult from "../component/HomeSearchResult";
 import HotelCarousel from "../../Carousel/component/HotelCrousel";
 import DishCarousel from "../../Carousel/component/DishCarousel";
+import CategoryBar from "../../utility/components/CategoryBar";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [hotels, setHotels] = useState([]);
-  const [dishes, setDishes] = useState([]);
+  const [topRatedHotels, setTopRatedHotels] = useState([]);
+  const [topRateddishes, setTopRatedDishes] = useState([]);
+  const [category, setCategory] = useState("All");
+
+  const color = {
+    Vegetarian: "bg-yellow-300",
+    "Non-Vegetarian": "bg-red-600",
+  };
 
   useEffect(() => {
     const fetchHotels = async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      setHotels(hotelsDetails);
-      setDishes(topDishes);
+
+      setTopRatedHotels(hotelsDetails);
+      setTopRatedDishes(topDishes);
       setIsLoading(false);
     };
 
     fetchHotels();
   }, []);
+
+  useEffect(() => {
+    const categorizedHotel =
+      category === "All"
+        ? hotelsDetails
+        : hotelsDetails.filter((hotel) => hotel.type === category);
+    setHotels(categorizedHotel);
+  }, [category, hotels]);
 
   return (
     <>
@@ -38,19 +55,28 @@ const Home = () => {
               <h1 className=" text-lg mb-2 md:text-xl md:mb-4 font-bold justify-center flex">
                 Top Rated Hotels
               </h1>
-              <HotelCarousel props={hotels} />
+              <HotelCarousel props={topRatedHotels} />
             </div>
 
             <div className="p-1 pr-0">
               <h1 className=" text-lg mb-2 md:text-xl md:mb-4 font-bold justify-center flex">
                 Most Liked Dishes
               </h1>
-              <DishCarousel props={dishes} />
+              <DishCarousel props={topRateddishes} />
             </div>
           </div>
           <h1 className=" text-lg mt-3 md:mt-8 mb-2 md:text-xl md:mb-4 font-bold flex justify-center">
             Hotels
           </h1>
+          <div className="ml-5">
+            <CategoryBar
+              selectedCategory={category}
+              onSelectCategory={setCategory}
+              categories={["Vegetarian", "Non-Vegetarian"]}
+              color={color}
+            />
+          </div>
+
           <div className=" p-4 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {hotels.map((hotel, index) => (
               <div className="cursor-pointer" key={index}>
