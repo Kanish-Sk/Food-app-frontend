@@ -5,6 +5,7 @@ import { orders as initialOrders } from "../../utility/data/OrdersData";
 import CategoryBar from "../../utility/components/CategoryBar";
 import { UserContext } from "../../utility/context/UserContext";
 import OrderCard from "../component/OrdersCard";
+import { toast } from "react-toastify";
 
 const Order = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -26,6 +27,17 @@ const Order = () => {
     });
     setOrderData(combinedData);
   }, []);
+
+  const onReOrder = (order) => {
+    const newOrder = {
+      ...order,
+      status: "Waiting",
+      orderId: Date.now(),
+      orderDate: new Date().toISOString(),
+    };
+    setOrderData([...orderData, newOrder]);
+    toast.success("Ordered sucessfully!");
+  };
 
   const cancelOrder = (orderId) => {
     setOrderData((prevOrders) =>
@@ -61,6 +73,7 @@ const Order = () => {
           <OrderCard
             key={order.orderId}
             order={order}
+            onReOrder={onReOrder}
             onCancelOrder={cancelOrder}
             statusStats={color}
           />

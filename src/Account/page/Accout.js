@@ -84,7 +84,7 @@ const Account = () => {
   return (
     <div className="min-h-screen p-4">
       <h1 className="text-xl font-bold text-center">Accounts Overview</h1>
-      <div className="mb-6 flex flex-col md:flex-row items-center gap-4">
+      <div className="mt-3 mb-5 md:-mb-3">
         <CategoryBar
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
@@ -92,7 +92,7 @@ const Account = () => {
           color={color}
         />
       </div>
-      <div className="grid grid-cols-1 -mt-7 gap-5 md:gap-7 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 md:gap-7 md:grid-cols-3">
         {filteredAccounts.map((account) => (
           <AccountCard
             key={account.accountId}

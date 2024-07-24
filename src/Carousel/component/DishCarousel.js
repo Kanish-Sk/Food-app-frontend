@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Carousel from "../component/Carousel";
 import { toast } from "react-toastify";
 
+import { FaUtensils, FaRupeeSign, FaHotel } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 
 const DishCarousel = ({ props }) => {
@@ -25,25 +26,28 @@ const DishCarousel = ({ props }) => {
       </div>
       <div className="p-1 md:p-3 w-full">
         <div className="w-full p-2 md:p-4 flex flex-col items-center justify-between">
-          <h1 className="font-serif text-green-600 text-lg text-center md:text-2xl font-bold -mt-2 md:mt-2 whitespace-nowrap">
+          <h1 className="font-serif text-yellow-400 text-xl md:text2xl font-bold mb-4 md:mb-8 -mt-2 md:mt-2 text-center">
             {currentSlide.name}
           </h1>
-          <div className="text-white font-extralight mt-1 md:mt-4 whitespace-nowrap">
-            <div className="p-1 md:p-4">
-              <strong>Hotel : </strong> {currentSlide.hotelName}
+          <div className="text-white space-y-1 md:space-y-3 w-full max-w-md">
+            <div className="flex items-center p-1 md:p-2 w-full justify-center">
+              <FaRupeeSign className="w-5 h-5 mr-3 text-yellow-400" />
+              <span>{currentSlide.price}/-</span>
             </div>
-            <div className="p-1 md:p-4">
-              <strong>Type : </strong> {currentSlide.type}
+            <div className="flex items-center p-1 md:p-2 w-full justify-center">
+              <FaUtensils className="w-5 h-5 mr-3 text-green-400" />
+              <span>{currentSlide.type}</span>
             </div>
-            <div className="p-1 md:p-4">
-              <strong>Price : </strong> {currentSlide.price}
+            <div className="flex items-center p-1 md:p-2 w-full justify-center">
+              <FaHotel className="w-5 h-5 mr-3 text-blue-400" />
+              <span>{currentSlide.hotelName}</span>
             </div>
           </div>
           <button
             onClick={handleOrder}
-            className="mt-3 md:mt-10 text-sm md:text-base font-serif uppercase text-gray-200 font-bold bg-green-600 rounded-lg px-3 md:px-4 py-2 hover:shadow-xl hover:shadow-black transition ease-in-out duration-200"
+            className="mt-3 md:mt-10 mb-2 md:mb-0 text-base md:text-lg font-serif w-fit uppercase text-white font-bold bg-gradient-to-r from-green-500 to-green-600 rounded-lg px-3 md:px-4 py-2 transition ease-in-out duration-300 hover:from-green-600 hover:to-green-700 hover:shadow-lg"
           >
-            order
+            Order
           </button>
         </div>
       </div>

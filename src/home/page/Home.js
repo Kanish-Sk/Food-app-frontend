@@ -68,7 +68,7 @@ const Home = () => {
           <h1 className=" text-lg mt-3 md:mt-8 mb-2 md:text-xl md:mb-4 font-bold flex justify-center">
             Hotels
           </h1>
-          <div className="ml-5">
+          <div className="ml-5 -mb-3">
             <CategoryBar
               selectedCategory={category}
               onSelectCategory={setCategory}

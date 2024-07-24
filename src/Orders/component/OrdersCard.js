@@ -4,9 +4,10 @@ import {
   FaCalendarAlt,
   FaShoppingCart,
   FaTimesCircle,
+  FaRedoAlt,
 } from "react-icons/fa";
 
-const OrderCard = ({ order, onCancelOrder, statusStats }) => {
+const OrderCard = ({ order, onReOrder, onCancelOrder, statusStats }) => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleString("en-US", {
@@ -63,7 +64,7 @@ const OrderCard = ({ order, onCancelOrder, statusStats }) => {
             <div className="flex items-center mt-1 text-gray-400">
               <FaShoppingCart className="mr-1 text-xs sm:text-sm" />
               <p className="text-xs sm:text-sm">
-                Quantity:{" "}
+                Quantity:
                 <span className="font-semibold">{order.quantity}</span>
               </p>
             </div>
@@ -76,6 +77,15 @@ const OrderCard = ({ order, onCancelOrder, statusStats }) => {
               >
                 <FaTimesCircle className="mr-1 sm:mr-2" />
                 Cancel
+              </button>
+            )}
+            {order.status === "Delivered" && (
+              <button
+                onClick={() => onReOrder(order)}
+                className="flex items-center px-2 sm:px-3 py-1 sm:py-2 bg-blue-600 text-white text-xs sm:text-sm rounded-full hover:bg-blue-700 transition duration-300"
+              >
+                <FaRedoAlt className="mr-1 sm:mr-2" />
+                Reorder
               </button>
             )}
           </div>

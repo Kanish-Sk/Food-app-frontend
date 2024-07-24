@@ -12,15 +12,15 @@ const CategoryBar = ({
   const allCategories = ["All", ...categories];
   const visibleCategories = showAll
     ? allCategories
-    : allCategories.slice(0, initialCategoriesCount);
+    : allCategories.slice(0, initialCategoriesCount.sm);
 
   return (
-    <div className="mb-8">
-      <div className="flex flex-wrap items-center gap-3 md:gap-4">
+    <div className="mb-3 md:mb-8">
+      <div className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4">
         {visibleCategories.map((category) => (
           <button
             key={category}
-            className={`py-2 px-4 rounded-full text-sm font-semibold transition-all duration-300 ${
+            className={`py-1 px-2 sm:py-1.5 sm:px-3 md:py-2 md:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 mb-2 ${
               selectedCategory === category
                 ? category === "All"
                   ? "bg-green-500 text-white"
@@ -32,16 +32,16 @@ const CategoryBar = ({
             {category}
           </button>
         ))}
-        {allCategories.length > initialCategoriesCount && (
+        {allCategories.length > initialCategoriesCount.sm && (
           <button
-            className={`py-2 px-4 rounded-full text-sm font-semibold transition-all duration-300 ${
+            className={`py-1 px-2 sm:py-1.5 sm:px-3 md:py-2 md:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 mb-2 ${
               showAll
                 ? "bg-red-500 text-white hover:bg-red-600"
                 : "bg-purple-500 text-white hover:bg-purple-400"
             }`}
             onClick={() => setShowAll(!showAll)}
           >
-            {showAll ? "Show Less" : "Show More"}
+            {showAll ? "Less" : "More"}
           </button>
         )}
       </div>
