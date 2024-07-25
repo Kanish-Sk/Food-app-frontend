@@ -103,7 +103,11 @@ const AccountCard = ({ account, onPay }) => {
         <div className="mt-6 flex flex-row w-full gap-2">
           <button
             onClick={handlePay}
-            className="bg-blue-600 text-white py-2 w-1/2 rounded-lg hover:bg-blue-700 transition duration-300"
+            className={`py-2 w-1/2 rounded-lg transition duration-300 ${
+              totalAmount <= 0
+                ? "bg-gray-500 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700 text-white"
+            }`}
           >
             Pay
           </button>

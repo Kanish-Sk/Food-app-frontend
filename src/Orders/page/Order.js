@@ -39,6 +39,14 @@ const Order = () => {
     toast.success("Ordered sucessfully!");
   };
 
+  const onPayOrder = (orderId) => {
+    setOrderData((prevOrders) =>
+      prevOrders.map((order) =>
+        order.orderId === orderId ? { ...order, paid: true } : order
+      )
+    );
+  };
+
   const cancelOrder = (orderId) => {
     setOrderData((prevOrders) =>
       prevOrders.map((order) =>
@@ -74,6 +82,7 @@ const Order = () => {
             key={order.orderId}
             order={order}
             onReOrder={onReOrder}
+            onPayOrder={onPayOrder}
             onCancelOrder={cancelOrder}
             statusStats={color}
           />

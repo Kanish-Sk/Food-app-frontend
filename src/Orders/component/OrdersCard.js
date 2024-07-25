@@ -5,9 +5,16 @@ import {
   FaShoppingCart,
   FaTimesCircle,
   FaRedoAlt,
+  FaCreditCard,
 } from "react-icons/fa";
 
-const OrderCard = ({ order, onReOrder, onCancelOrder, statusStats }) => {
+const OrderCard = ({
+  order,
+  onReOrder,
+  onPayOrder,
+  onCancelOrder,
+  statusStats,
+}) => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleString("en-US", {
@@ -79,7 +86,16 @@ const OrderCard = ({ order, onReOrder, onCancelOrder, statusStats }) => {
                 Cancel
               </button>
             )}
-            {order.status === "Delivered" && (
+            {order.status === "Preparing" && !order.paid && (
+              <button
+                onClick={() => onPayOrder(order.orderId)}
+                className="flex items-center px-2 sm:px-3 py-1 sm:py-2 bg-green-600 text-white text-xs sm:text-sm rounded-full hover:bg-green-700 transition duration-300"
+              >
+                <FaCreditCard className="mr-1 sm:mr-2" />
+                Pay
+              </button>
+            )}
+            {["Delivered", "Cancelled"].includes(order.status) && (
               <button
                 onClick={() => onReOrder(order)}
                 className="flex items-center px-2 sm:px-3 py-1 sm:py-2 bg-blue-600 text-white text-xs sm:text-sm rounded-full hover:bg-blue-700 transition duration-300"
