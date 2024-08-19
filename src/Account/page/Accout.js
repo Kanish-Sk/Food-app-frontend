@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import AccountCard from "../component/AccountCard";
-import { accounts } from "../../utility/data/AccountData";
-import { hotelsDetails } from "../../utility/data/HomeData";
-import CategoryBar from "../../utility/components/CategoryBar";
-import { UserContext } from "../../utility/context/UserContext";
+import { accounts } from "../../Shared/data/AccountData";
+import { hotelsDetails } from "../../Shared/data/HomeData";
+import CategoryBar from "../../Shared/components/CategoryBar";
+import { UserContext } from "../../Shared/context/UserContext";
 import { isAfter, parseISO } from "date-fns";
 
 const Account = () => {

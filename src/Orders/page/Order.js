@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { hotelsDetails } from "../../utility/data/HomeData";
-import { dishes } from "../../utility/data/DishData";
-import { orders as initialOrders } from "../../utility/data/OrdersData";
-import CategoryBar from "../../utility/components/CategoryBar";
-import { UserContext } from "../../utility/context/UserContext";
+import { hotelsDetails } from "../../Shared/data/HomeData";
+import { dishes } from "../../Shared/data/DishData";
+import { orders as initialOrders } from "../../Shared/data/OrdersData";
+import CategoryBar from "../../Shared/components/CategoryBar";
+import { UserContext } from "../../Shared/context/UserContext";
 import OrderCard from "../component/OrdersCard";
 import { toast } from "react-toastify";
 

@@ -20,7 +20,7 @@ const HotelCarousel = ({ props }) => {
   };
 
   return (
-    <div className="md:flex bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl w-full shadow-2xl overflow-hidden">
+    <div className="md:flex bg-gray-800 rounded-3xl w-full shadow-2xl overflow-hidden">
       <div className="md:w-1/2 p-2 md:p-4">
         <Carousel slides={props} onSlideChange={updateCurrentSlideIndex} />
       </div>

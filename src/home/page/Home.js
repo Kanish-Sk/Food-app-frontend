@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import HotelCard from "../component/HotelCard";
-import Loading from "../../utility/components/Loading";
-import { hotelsDetails, topDishes } from "../../utility/data/HomeData";
+import Loading from "../../Shared/components/Loading";
+import { hotelsDetails, topDishes } from "../../Shared/data/HomeData";
 
 import HomeSearchResult from "../component/HomeSearchResult";
 import HotelCarousel from "../../Carousel/component/HotelCrousel";
 import DishCarousel from "../../Carousel/component/DishCarousel";
-import CategoryBar from "../../utility/components/CategoryBar";
+import CategoryBar from "../../Shared/components/CategoryBar";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -77,7 +77,7 @@ const Home = () => {
             />
           </div>
 
-          <div className=" p-4 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className=" p-4 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             {hotels.map((hotel, index) => (
               <div className="cursor-pointer" key={index}>
                 <HotelCard hotel={hotel} />

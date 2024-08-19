@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import { search, close } from "../../utility/svg/icons";
-import { UserContext } from "../../utility/context/UserContext";
+import { search, close } from "../../Shared/svg/icons";
+import { UserContext } from "../../Shared/context/UserContext";
 import { useLocation } from "react-router-dom";
 
 function SearchBar() {

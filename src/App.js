@@ -2,17 +2,17 @@ import Account from "./Account/page/Accout";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Home from "./home/page/Home";
-import BackDrop from "./utility/components/Backdrop";
+import BackDrop from "./Shared/components/Backdrop";
 import SideBar from "./navbar/component/Sidebar";
 import TopNavbar from "./navbar/component/TopNavBar";
 import SideDrawer from "./navbar/component/SideDrawer";
 import HotelDetails from "./hotel/page/HotelDetails";
 import Footer from "./footer/Footer";
+import Profile from "./Proflie/page/Profile";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { UserContext, UserProvider } from "./utility/context/UserContext";
+import { UserContext, UserProvider } from "./Shared/context/UserContext";
 import { ToastContainer } from "react-toastify";
-import Profile from "./Proflie/Profile";
 import Order from "./Orders/page/Order";
 import AuthPage from "./Auth/page/Auth";
 

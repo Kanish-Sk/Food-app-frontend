@@ -1,67 +1,101 @@
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaClock, FaUtensils, FaPhoneAlt, FaEye } from "react-icons/fa";
 
 const HotelCard = ({ hotel }) => {
-  const [content, setContent] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
   const navigate = useNavigate();
 
-  const handleContent = () => {
-    setContent(!content);
-  };
+  const handleExpand = useCallback(() => {
+    setExpanded((prevExpanded) => !prevExpanded);
+  }, []);
 
-  const handleViewHotel = (e) => {
-    e.stopPropagation();
-    navigate(`${hotel.name}/dishes`, { state: { hotelDetails: hotel } });
-  };
+  const handleViewHotel = useCallback(
+    (e) => {
+      e.stopPropagation();
+      navigate(`${hotel.name}/dishes`, { state: { hotelDetails: hotel } });
+    },
+    [navigate, hotel]
+  );
+
+  const handleFailedImage = useCallback(() => {
+    setImageFailed(true);
+  }, []);
+
+  const handleLoadedImage = useCallback(() => {
+    setImageFailed(false);
+  }, []);
 
   return (
     <div
-      onClick={handleContent}
-      className="h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden relative"
+      className={`card-container h-72 md:h-80 rounded-2xl overflow-hidden relative ${
+        imageFailed ? "border-2 border-gray-300" : ""
+      } shadow-lg transition-all duration-300 hover:shadow-2xl cursor-pointer group`}
+      onClick={handleExpand}
     >
       <img
-        className="absolute w-full h-full object-cover"
         src={hotel.image}
         alt={hotel.name}
-      />
-      <div className="absolute top-2 left-2 flex items-center bg-white bg-opacity-15 backdrop-blur-xl px-2 py-1 rounded-md text-white">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-          />
-        </svg>
-        <div className="text-xs sm:text-sm md:text-base">{hotel.timing}</div>
-      </div>
-      <div
-        className={`absolute bottom-0 left-0 bg-white bg-opacity-15 backdrop-blur-xl text-white text-center w-full transition-all duration-300 ${
-          content ? "h-4/6" : "h-1/6"
+        className={`h-full w-full object-cover transition-all duration-500 ${
+          expanded
+            ? "filter blur-sm scale-110 brightness-50"
+            : "group-hover:scale-105"
         }`}
-      >
-        <div className="w-full p-2 flex flex-col items-center justify-between h-full">
-          <h1 className="font-serif text-black text-xs sm:text-sm md:text-xl font-bold">
+        onLoad={handleLoadedImage}
+        onError={handleFailedImage}
+      />
+      <div className="absolute top-3 left-3 bg-white bg-opacity-75 backdrop-blur-xl px-3 py-1 rounded-full text-xs font-semibold text-gray-800 shadow-md flex items-center">
+        <FaClock className="mr-2 text-blue-500" />
+        {hotel.timing}
+      </div>
+      {expanded ? (
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/90 to-gray-800/90 flex flex-col items-center justify-center text-white p-6">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-yellow-300 flex items-center">
             {hotel.name}
-          </h1>
-          <div className="text-white text-xs sm:text-sm md:text-base font-medium mt-1">
-            <div className="mb-1 font-extralight">{hotel.type}</div>
-            <div className="font-extralight">{hotel.contact}</div>
+          </h3>
+          <div className="w-full max-w-xs space-y-4">
+            <div className="flex justify-between items-center">
+              <span className="text-gray-300 text-sm flex items-center">
+                <FaUtensils className="mr-2 text-pink-400" /> Type
+              </span>
+              <span className="text-sm text-pink-400">{hotel.type}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-300 text-sm flex items-center">
+                <FaPhoneAlt className="mr-2 text-green-400" /> Contact
+              </span>
+              <span className="text-sm text-green-400">{hotel.contact}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-300 text-sm flex items-center">
+                <FaClock className="mr-2 text-blue-400" /> Timing
+              </span>
+              <span className="text-sm text-blue-400">{hotel.timing}</span>
+            </div>
           </div>
           <button
             onClick={handleViewHotel}
-            className="mt-2 sm:mt-4 text-xs sm:text-sm font-serif uppercase text-gray-200 font-bold bg-green-600 rounded-lg px-3 py-1 sm:py-2 transition-all duration-300 hover:translate-y-[-0.25rem]"
+            className="w-full max-w-xs mt-6 bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-bold py-3 px-4 rounded-lg text-sm transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center"
           >
-            view
+            <FaEye className="mr-2" /> View Menu
           </button>
         </div>
-      </div>
+      ) : (
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-gray-900 to-transparent p-4 sm:p-6">
+          <h2 className="text-yellow-300 text-lg sm:text-xl md:text-2xl font-bold mb-2">
+            {hotel.name}
+          </h2>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-300 text-sm sm:text-base flex items-center">
+              <FaUtensils className="mr-2 text-pink-400" /> {hotel.type}
+            </span>
+            <span className="text-gray-300 text-sm sm:text-base flex items-center">
+              <FaPhoneAlt className="mr-2 text-green-400" /> {hotel.contact}
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

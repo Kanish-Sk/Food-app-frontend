@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { menu, location, moon, sun } from "../../utility/svg/icons";
+import { menu, location, moon, sun } from "../../Shared/svg/icons";
 import SearchBar from "./SearchBar";
 
 const Navbar = ({ toggleDrawerHandler, toggleDarkMode, darkMode }) => {

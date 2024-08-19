@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../utility/context/UserContext";
-import { hotelsDetails } from "../../utility/data/HomeData";
-import { dishes } from "../../utility/data/DishData"; // Adjusted import to use named export
+import { UserContext } from "../../Shared/context/UserContext";
+import { hotelsDetails } from "../../Shared/data/HomeData";
+import { dishes } from "../../Shared/data/DishData";
 import HotelCard from "./HotelCard";
 import Dish from "../../hotel/component/Dish";
 
@@ -30,7 +30,6 @@ const HomeSearchResult = () => {
 
       // Filter dishes based on search query
       const filteredDishes = hotelsDetails.reduce((acc, hotel) => {
-        // Get the dishes for the hotel and filter them based on the search query
         const dishesForHotel = hotel.dishIds
           .map((id) => dishMap[id])
           .filter((dish) =>
@@ -48,26 +47,26 @@ const HomeSearchResult = () => {
   }, [searchQuery]);
 
   return searchQuery.length > 0 ? (
-    <div>
-      <h1 className="text-2xl font-bold pl-2 mb-4">Search Results</h1>
-      <div className="text-white px-1">
-        {hotels.length > 0 || filteredDishes.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="px-2">
+      <h1 className="text-lg md:text-xl font-bold mb-4">Search Results</h1>
+      {hotels.length > 0 || filteredDishes.length > 0 ? (
+        <div className="overflow-x-auto">
+          <div className="flex space-x-4 pb-4 ">
             {hotels.map((hotel, index) => (
-              <div className="cursor-pointer" key={index}>
+              <div key={index} className="w-full md:w-1/4 flex-shrink-0">
                 <HotelCard hotel={hotel} />
               </div>
             ))}
             {filteredDishes.map((dish, index) => (
-              <div key={index}>
+              <div key={index} className="w-full md:w-1/4 flex-shrink-0">
                 <Dish dish={dish} />
               </div>
             ))}
           </div>
-        ) : (
-          <div>Not found</div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="text-white">Not found</div>
+      )}
     </div>
   ) : null;
 };

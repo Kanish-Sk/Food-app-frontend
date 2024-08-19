@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Logo from "../../utility/images/Grab.png";
+import Logo from "../../Shared/images/Grab.png";
 import { data } from "./SideBarData";
-import "../../utility/styles/buttonStyle.css";
+import "../../Shared/styles/buttonStyle.css";
 import { toast } from "react-toastify";
 
 const SideBar = ({ setIsLogin, setUsername }) => {

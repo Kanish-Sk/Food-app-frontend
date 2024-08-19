@@ -1,86 +1,105 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { renderInput, useInputState } from "../../utility/hooks/UseInputRename";
+import FormButton from "../../Shared/FormElements/FormButton";
+import LinkButton from "../../Shared/FormElements/LinkButton";
+import Input from "../../Shared/FormElements/Input";
+import {
+  VALIDATOR_EMAIL,
+  VALIDATOR_MAXLENGTH,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRE,
+} from "../../Shared/utils/validators";
+import { useForm } from "../../Shared/hooks/form-hook";
 
 const Register = ({ toggleMode }) => {
-  const inputState = useInputState({
-    username: "",
-    email: "",
-    password: "",
-  });
-  const [error, setError] = useState(true);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
 
-  useEffect(() => {
-    const allFieldsFilled = Object.values(inputState.inputValues).every(
-      (value) => value.trim() !== ""
-    );
-    const isValid =
-      allFieldsFilled &&
-      isEmailVerified &&
-      inputState.inputValues.username.length >= 4 &&
-      inputState.inputValues.password.length >= 6;
-    setError(!isValid);
-  }, [inputState.inputValues, isEmailVerified]);
+  const [formState, inputHandler] = useForm(
+    {
+      username: {
+        value: "",
+        isValid: false,
+      },
+      email: {
+        value: "",
+        isValid: false,
+      },
+      password: {
+        value: "",
+        isValid: false,
+      },
+    },
+    false
+  );
 
-  const handleVerifyEmail = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const trimmedEmail = inputState.inputValues.email.trim();
-
-    if (!emailRegex.test(trimmedEmail)) {
-      toast.error("Invalid email format");
-      return;
-    }
-    toast.info("Verification link sent to your email");
-    setTimeout(() => {
-      setIsEmailVerified(true);
-      toast.success("Email verified successfully");
-    }, 2000);
+  const handleEmailVerification = () => {
+    // Implement email verification logic here
+    // For now, let's just toggle the state
+    setIsEmailVerified(!isEmailVerified);
+    toast.success("Email verification status updated");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputState.inputValues.username.length < 4) {
-      toast.error("Username must be at least 4 characters long");
-      return;
+    if (formState.isValid) {
+      console.log(formState.inputs);
+      toast.success("Registered successfully");
+      toggleMode("login");
+    } else {
+      toast.error("Please fill all fields correctly");
     }
-    if (inputState.inputValues.password.length < 6) {
-      toast.error("Password must be at least 6 characters long");
-      return;
-    }
-    if (!isEmailVerified) {
-      toast.error("Please verify your email before registering");
-      return;
-    }
-    toast.success("Registered successfully");
-    toggleMode("login");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {renderInput("username", inputState)}
-      {renderInput("email", inputState, "email")}
-      <p className="w-full flex justify-end">
-        <button
-          onClick={handleVerifyEmail}
-          type="button"
-          className={`text-blue-400 text-sm hover:underline ${
-            isEmailVerified ? "text-green-400" : ""
-          }`}
-        >
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <Input
+        id="username"
+        type="username"
+        name="username"
+        validators={[
+          VALIDATOR_REQUIRE(),
+          VALIDATOR_MINLENGTH(3),
+          VALIDATOR_MAXLENGTH(8),
+        ]}
+        onInput={inputHandler}
+      />
+
+      <Input
+        id="email"
+        type="email"
+        name="email"
+        validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
+        onInput={inputHandler}
+      />
+      <p className="flex justify-end py-2">
+        <LinkButton onClick={() => handleEmailVerification()}>
           {isEmailVerified ? "Email Verified" : "Verify Email"}
-        </button>
+        </LinkButton>
       </p>
-      {renderInput("password", inputState, "password")}
-      <button
-        type="submit"
-        className={`w-full px-4 py-3 text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors duration-300 ${
-          error ? "opacity-50 cursor-not-allowed" : ""
-        }`}
-        disabled={error}
-      >
-        Register
-      </button>
+      <Input
+        id="password"
+        type="password"
+        name="password"
+        validators={[
+          VALIDATOR_REQUIRE(),
+          VALIDATOR_MINLENGTH(6),
+          VALIDATOR_MAXLENGTH(12),
+        ]}
+        onInput={inputHandler}
+      />
+      <div className="text-center">
+        <FormButton
+          type="submit"
+          disabled={!formState.isValid || !isEmailVerified}
+          className="h-12 px-3 w-full text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors duration-300"
+        >
+          Register
+        </FormButton>
+      </div>
+      <p className="text-center text-sm text-gray-400">
+        Already have an account?{" "}
+        <LinkButton onClick={() => toggleMode("login")}>Login</LinkButton>
+      </p>
     </form>
   );
 };
