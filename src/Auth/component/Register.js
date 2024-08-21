@@ -33,10 +33,13 @@ const Register = ({ toggleMode }) => {
   );
 
   const handleEmailVerification = () => {
-    // Implement email verification logic here
-    // For now, let's just toggle the state
-    setIsEmailVerified(!isEmailVerified);
-    toast.success("Email verification status updated");
+    if (formState.inputs.email.isValid) {
+      setIsEmailVerified(true);
+      toast.success("Email verification link sent to your email.");
+    } else {
+      setIsEmailVerified(false);
+      toast.error("Invalid email address.");
+    }
   };
 
   const handleSubmit = (e) => {

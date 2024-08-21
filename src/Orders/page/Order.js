@@ -66,7 +66,7 @@ const Order = () => {
     );
 
   return (
-    <div className="min-h-screen p-6 pt-3 md:p-10 md:pt-2">
+    <div className="min-h-screen p-4 pt-3 md:pt-2">
       <h1 className="text-center text-xl font-bold mb-4">My Orders</h1>
 
       <CategoryBar

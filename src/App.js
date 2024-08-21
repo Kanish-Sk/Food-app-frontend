@@ -1,20 +1,17 @@
-import Account from "./Account/page/Accout";
+// App.js
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Home from "./home/page/Home";
 import BackDrop from "./Shared/components/Backdrop";
-import SideBar from "./navbar/component/Sidebar";
-import TopNavbar from "./navbar/component/TopNavBar";
-import SideDrawer from "./navbar/component/SideDrawer";
+import MainNavbar from "./navbar/page/MainNavbar";
 import HotelDetails from "./hotel/page/HotelDetails";
 import Footer from "./footer/Footer";
 import Profile from "./Proflie/page/Profile";
-
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import { UserContext, UserProvider } from "./Shared/context/UserContext";
 import { ToastContainer } from "react-toastify";
 import Order from "./Orders/page/Order";
 import AuthPage from "./Auth/page/Auth";
+import Account from "./Account/page/Accout";
 
 const App = () => {
   const { username, setUsername } = useContext(UserContext);
@@ -64,39 +61,25 @@ const App = () => {
         <div
           className={`flex flex-col min-h-screen px-4 pb-4 font-body ${
             darkMode ? "bg-gray-900 text-gray-300" : "bg-gray-300 text-gray-900"
-          } ${!username && !islogin ? "blur-xl" : ""}`}
+          } `}
         >
-          {(!islogin || drawerIsOpen) && (
-            <BackDrop onClick={toggleDrawerHandler} />
-          )}
+          <div className={`${!username && !islogin ? "blur-xl" : ""}`}>
+            {(!islogin || drawerIsOpen) && (
+              <BackDrop onClick={toggleDrawerHandler} />
+            )}
 
-          <div className="flex">
-            <div className="z-50">
-              <div className="hidden md:block mt-3 fixed h-screen pb-8">
-                <SideBar setIsLogin={setIsLogin} setUsername={setUsername} />
-              </div>
-              <div className="hidden md:block h-full ml-24">
-                <SideDrawer show={drawerIsOpen} onClick={toggleDrawerHandler}>
-                  <SideBar setIsLogin={setIsLogin} setUsername={setUsername} />
-                </SideDrawer>
-              </div>
-            </div>
-            <div className="w-full flex flex-col">
-              <div
-                className={`sticky z-10 top-0 h-24 flex items-center w-full ${
-                  darkMode
-                    ? "bg-gray-900 text-gray-300"
-                    : "bg-gray-300 text-gray-900"
-                }`}
-              >
-                <TopNavbar
-                  toggleDrawerHandler={toggleDrawerHandler}
-                  toggleDarkMode={toggleDarkMode}
-                  darkMode={darkMode}
-                />
-              </div>
+            <MainNavbar
+              toggleDrawerHandler={toggleDrawerHandler}
+              toggleDarkMode={toggleDarkMode}
+              darkMode={darkMode}
+              setIsLogin={setIsLogin}
+              setUsername={setUsername}
+              drawerIsOpen={drawerIsOpen}
+              islogin={islogin}
+            />
 
-              <div className="relative">
+            <div className="md:ml-24">
+              {islogin && (
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/profile" element={<Profile />} />
@@ -104,25 +87,25 @@ const App = () => {
                   <Route path="/account" element={<Account />} />
                   <Route path="/:hotelname/dishes" element={<HotelDetails />} />
                 </Routes>
-              </div>
-
+              )}
               <Footer />
             </div>
           </div>
+
+          {!islogin && (
+            <AuthPage setIsLogin={setIsLogin} setUsername={setUsername} />
+          )}
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </div>
-        {!islogin && (
-          <AuthPage setIsLogin={setIsLogin} setUsername={setUsername} />
-        )}
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </Router>
     </UserProvider>
   );

@@ -1,22 +1,19 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./footer.css";
-
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 const Footer = () => {
   return (
     <div className="bg-gray-800 w-full h-16 md:h-20 rounded-2xl p-2 flex items-center justify-center bottom-0">
       <ul className="flex space-x-4">
         <li className="item">
           <a href="mailto:kanishshivan@gmail.com" aria-label="Email">
-            <i className="fas fa-envelope logo"></i>
+            <FontAwesomeIcon icon={faEnvelope} className="logo" />
           </a>
         </li>
         <li className="item">
-          <a
-            href="https://www.instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <i className="fab fa-instagram logo"></i>
+          <a href="https://www.instagram.com" aria-label="Instagram">
+            <FaInstagram className="logo" />
           </a>
         </li>
         <li className="item">
@@ -26,7 +23,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             aria-label="LinkedIn"
           >
-            <i className="fab fa-linkedin logo"></i>
+            <FaLinkedin className="logo" />
           </a>
         </li>
         <li className="item">
@@ -36,7 +33,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             aria-label="Twitter"
           >
-            <i className="fa-brands fa-x-twitter logo"></i>
+            <FaTwitter className="logo" />
           </a>
         </li>
       </ul>

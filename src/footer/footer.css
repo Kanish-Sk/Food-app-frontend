@@ -71,8 +71,8 @@ i {
 }
 
 .logo {
-  display: flex;
-  font-size: 20px;
+  width: 20px;
+  height: 20px;
   color: hsl(203, 92%, 8%);
   transition: 0.5s ease;
   z-index: 2;

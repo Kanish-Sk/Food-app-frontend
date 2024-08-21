@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Logo from "../../Shared/images/Grab.png";
-import { data } from "./SideBarData";
+import { data } from "./SideBarDetails";
 import "../../Shared/styles/buttonStyle.css";
 import { toast } from "react-toastify";
 
@@ -24,6 +24,7 @@ const SideBar = ({ setIsLogin, setUsername }) => {
       className="bg-gray-800 p-5 md:rounded-3xl w-full md:w-max flex h-full flex-col justify-between"
       style={{ zIndex: 1000 }}
     >
+      {/*Logo and Title*/}
       <div>
         <div className="mb-10">
           <div className="flex items-center">
@@ -38,6 +39,7 @@ const SideBar = ({ setIsLogin, setUsername }) => {
           </div>
         </div>
 
+        {/* Icons like home etc */}
         <div className="flex flex-col items-start md:items-center space-y-5 flex-grow z-10">
           {Object.entries(data).map(([key, value]) => (
             <li
@@ -65,6 +67,7 @@ const SideBar = ({ setIsLogin, setUsername }) => {
         </div>
       </div>
 
+      {/* Logout */}
       <div className="flex text-black items-center justify-center w-full mb-20 md:mb-0 md:w-auto mt-10 md:mt-auto">
         <Link onClick={handleLoggout}>
           <div className="badge btninner border-2 bg-black md:before:bg-green-400">
