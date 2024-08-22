@@ -4,8 +4,8 @@ import Loading from "../../Shared/components/Loading";
 import { hotelsDetails, topDishes } from "../../Shared/data/HomeData";
 
 import HomeSearchResult from "../component/HomeSearchResult";
-import HotelCarousel from "../../Carousel/component/HotelCrousel";
-import DishCarousel from "../../Carousel/component/DishCarousel";
+import HotelCarousel from "../../Carousel/page/HotelCrousel";
+import DishCarousel from "../../Carousel/page/DishCarousel";
 import CategoryBar from "../../Shared/components/CategoryBar";
 
 const Home = () => {

@@ -26,7 +26,7 @@ ul {
   position: relative;
   z-index: 1;
   border: 3px solid #f0f9fe;
-  overflow: hidden;
+  overflow: visible;
 }
 
 i {
@@ -38,19 +38,13 @@ i {
   .item a {
     width: 30px;
     height: 30px;
-    padding: 15px;
+    padding: 5px;
   }
 
   .logo {
-    font-size: 25px;
-    padding-left: 0px;
-    display: flex;
-  }
-
-  i {
-    padding-left: 40px;
-    margin-left: 3px;
-    /* padding: 2px; */
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
   }
 }
 
