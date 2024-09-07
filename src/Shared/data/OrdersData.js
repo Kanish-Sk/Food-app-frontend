@@ -18,7 +18,7 @@ export const orders = [
     dishId: 1,
     hotelId: 2,
     status: "Preparing",
-    orderDate: "2024-07-22T09:15:00Z",
+    orderDate: "2024-09-01T09:15:00Z",
     price: 30,
     quantity: 1, // Added quantity
     paid: false,
@@ -30,7 +30,7 @@ export const orders = [
     dishId: 3,
     hotelId: 3,
     status: "Waiting",
-    orderDate: "2024-07-22T17:45:00Z",
+    orderDate: "2024-09-03T17:45:00Z",
     price: 180,
     quantity: 3, // Added quantity
     paid: false,
@@ -42,7 +42,7 @@ export const orders = [
     dishId: 2,
     hotelId: 1,
     status: "Delivered",
-    orderDate: "2024-07-20T12:00:00Z",
+    orderDate: "2024-09-05T12:00:00Z",
     price: 40,
     quantity: 4, // Added quantity
     paid: false,
@@ -54,7 +54,7 @@ export const orders = [
     dishId: 3,
     hotelId: 2,
     status: "Cancelled",
-    orderDate: "2024-07-19T18:30:00Z",
+    orderDate: "2024-09-07T18:30:00Z",
     price: 20,
     quantity: 2, // Added quantity
     paid: false,

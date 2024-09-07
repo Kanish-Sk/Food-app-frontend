@@ -7,6 +7,7 @@ import HomeSearchResult from "../component/HomeSearchResult";
 import HotelCarousel from "../../Carousel/page/HotelCrousel";
 import DishCarousel from "../../Carousel/page/DishCarousel";
 import CategoryBar from "../../Shared/components/CategoryBar";
+import LazyLoad from "../../Shared/components/LazyLoadCard";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -80,7 +81,9 @@ const Home = () => {
           <div className=" p-4 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             {hotels.map((hotel, index) => (
               <div className="cursor-pointer" key={index}>
-                <HotelCard hotel={hotel} />
+                <LazyLoad>
+                  <HotelCard hotel={hotel} />
+                </LazyLoad>
               </div>
             ))}
           </div>

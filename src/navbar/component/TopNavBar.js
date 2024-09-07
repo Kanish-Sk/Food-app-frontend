@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { menu, location, moon, sun } from "../../Shared/svg/icons";
 import SearchBar from "./SearchBar";
+import { UserContext } from "../../Shared/context/UserContext";
 
-const TopNavbar = ({ toggleDrawerHandler, toggleDarkMode, darkMode }) => {
-  const [, setTheme] = useState("light");
+const TopNavbar = ({ toggleDrawerHandler }) => {
+  const { darkMode, setDarkMode, darkModeEditPermission } =
+    useContext(UserContext);
+
   const locationPath = useLocation().pathname;
 
-  useEffect(() => {
-    setTheme(darkMode ? "dark" : "light");
-  }, [darkMode]);
-
   const handleThemeToggle = () => {
-    toggleDarkMode();
+    if (darkModeEditPermission) {
+      setDarkMode(!darkMode);
+    }
   };
 
   return (
@@ -42,31 +43,38 @@ const TopNavbar = ({ toggleDrawerHandler, toggleDarkMode, darkMode }) => {
           </div>
         )}
 
-        {/* Dark mode button for medium screen */}
-        <div
-          onClick={handleThemeToggle}
-          className={`hidden md:flex p-3 gap-5 rounded-full transition ease-in-out duration-500 cursor-pointer ${
-            darkMode ? "bg-black" : "bg-white"
-          }`}
-        >
-          <div className="text-white">{moon}</div>
-          <div className={`${darkMode ? "text-black" : "text-yellow-400"}`}>
-            {sun}
-          </div>
-        </div>
+        {/* Conditionally render dark mode buttons based on darkModeEditPermission */}
+        {darkModeEditPermission && (
+          <>
+            {/* Dark mode button for medium screen */}
+            <div
+              onClick={handleThemeToggle}
+              className={`hidden md:flex p-3 gap-5 rounded-full transition ease-in-out duration-500 cursor-pointer ${
+                darkMode ? "bg-black" : "bg-white"
+              }`}
+            >
+              <div className="text-white">{moon}</div>
+              <div className={`${darkMode ? "text-black" : "text-yellow-400"}`}>
+                {sun}
+              </div>
+            </div>
 
-        {/* Dark mode button for small screen */}
-        <div
-          onClick={handleThemeToggle}
-          className={`sm:block md:hidden p-3 rounded-full transition ease-in-out duration-500 cursor-pointer ${
-            darkMode ? "bg-black" : "bg-white"
-          }`}
-        >
-          <div className={`${darkMode ? "text-white" : "hidden"}`}>{moon}</div>
-          <div className={`${darkMode ? "hidden" : "text-yellow-400"}`}>
-            {sun}
-          </div>
-        </div>
+            {/* Dark mode button for small screen */}
+            <div
+              onClick={handleThemeToggle}
+              className={`sm:block md:hidden p-3 rounded-full transition ease-in-out duration-500 cursor-pointer ${
+                darkMode ? "bg-black" : "bg-white"
+              }`}
+            >
+              <div className={`${darkMode ? "text-white" : "hidden"}`}>
+                {moon}
+              </div>
+              <div className={`${darkMode ? "hidden" : "text-yellow-400"}`}>
+                {sun}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

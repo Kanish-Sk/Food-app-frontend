@@ -32,7 +32,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter"
-            className="bg-red-900"
+            className="bg-red-900f"
           >
             <FaTwitter className="logo" />
           </a>

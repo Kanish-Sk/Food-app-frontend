@@ -5,6 +5,7 @@ import { UserContext } from "../../Shared/context/UserContext";
 import { dishes } from "../../Shared/data/DishData";
 import CategoryBar from "../../Shared/components/CategoryBar";
 import { FaPhone, FaMapMarkerAlt, FaClock } from "react-icons/fa";
+import LazyLoad from "../../Shared/components/LazyLoadCard";
 
 const HotelDetails = () => {
   const { state } = useLocation();
@@ -44,10 +45,10 @@ const HotelDetails = () => {
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div className="absolute inset-0 flex items-center justify-center p-4">
           <div className="text-center text-white">
-            <h1 className="text-5xl md:text-6xl font-bold mb-2 text-shadow-lg">
+            <h1 className="text-3xl md:text-6xl font-bold mb-2 text-shadow-lg">
               {hotelDetails.name}
             </h1>
-            <p className="text-2xl bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text font-semibold">
+            <p className="text-xl md:text-2xl bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text font-semibold">
               {hotelDetails.type} Restaurant
             </p>
           </div>
@@ -77,8 +78,8 @@ const HotelDetails = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12">
-        <h2 className="text-4xl font-bold mb-10 text-center bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+      <div className="container mx-auto px-4 py-6">
+        <h2 className="text-2xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
           Our Delightful Menu
         </h2>
 
@@ -89,13 +90,15 @@ const HotelDetails = () => {
         />
 
         {filteredDishes.length === 0 ? (
-          <p className="text-center mt-8 text-xl">
+          <p className="text-center mt-4 text-xl">
             No dishes found matching your search.
           </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-4">
             {filteredDishes.map((dish) => (
-              <Dish key={dish.id} dish={dish} />
+              <LazyLoad>
+                <Dish key={dish.id} dish={dish} />
+              </LazyLoad>
             ))}
           </div>
         )}

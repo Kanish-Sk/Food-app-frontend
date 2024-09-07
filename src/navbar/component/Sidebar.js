@@ -1,17 +1,20 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Logo from "../../Shared/images/Grab.png";
 import { data } from "./SideBarDetails";
 import "../../Shared/styles/buttonStyle.css";
 import { toast } from "react-toastify";
+import { UserContext } from "../../Shared/context/UserContext";
 
-const SideBar = ({ setIsLogin, setUsername }) => {
+const SideBar = () => {
+  const { setUsername, setIsLogin, setDarkMode } = useContext(UserContext);
   const location = useLocation();
   const [activePath, setActivepath] = useState(location.pathname);
 
   const handleLoggout = () => {
     setUsername("");
     setIsLogin(false);
+    setDarkMode(false);
     toast.success("Loggout succesfully.");
   };
 
@@ -21,7 +24,7 @@ const SideBar = ({ setIsLogin, setUsername }) => {
 
   return (
     <nav
-      className="bg-gray-800 p-5 md:rounded-3xl w-full md:w-max flex h-full flex-col justify-between"
+      className="bg-gray-800 p-5 mt-4s md:rounded-3xl w-full md:w-max flex h-full flex-col justify-between"
       style={{ zIndex: 1000 }}
     >
       {/*Logo and Title*/}

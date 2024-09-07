@@ -5,14 +5,15 @@ const CategoryBar = ({
   onSelectCategory,
   categories,
   color = {},
+  isAll = true,
 }) => {
   const [showAll, setShowAll] = useState(false);
-  const initialCategoriesCount = 5;
+  const initialCategoriesCount = 4;
 
-  const allCategories = ["All", ...categories];
+  const allCategories = isAll ? ["All", ...categories] : [...categories];
   const visibleCategories = showAll
     ? allCategories
-    : allCategories.slice(0, initialCategoriesCount.sm);
+    : allCategories.slice(0, initialCategoriesCount);
 
   return (
     <div className="mb-3 md:mb-8">
@@ -32,7 +33,7 @@ const CategoryBar = ({
             {category}
           </button>
         ))}
-        {allCategories.length > initialCategoriesCount.sm && (
+        {allCategories.length > initialCategoriesCount && (
           <button
             className={`py-1 px-2 sm:py-1.5 sm:px-3 md:py-2 md:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 mb-2 ${
               showAll

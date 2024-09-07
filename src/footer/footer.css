@@ -24,9 +24,9 @@ ul {
   align-items: center;
   text-align: center;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   border: 3px solid #f0f9fe;
-  overflow: visible;
+  overflow: hidden;
 }
 
 i {

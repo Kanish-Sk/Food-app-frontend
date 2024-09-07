@@ -5,6 +5,7 @@ import { hotelsDetails } from "../../Shared/data/HomeData";
 import CategoryBar from "../../Shared/components/CategoryBar";
 import { UserContext } from "../../Shared/context/UserContext";
 import { isAfter, parseISO } from "date-fns";
+import LazyLoad from "../../Shared/components/LazyLoadCard";
 
 const Account = () => {
   const [accountData, setAccountData] = useState([]);
@@ -94,11 +95,13 @@ const Account = () => {
       </div>
       <div className="grid grid-cols-1 gap-5 md:gap-7 md:grid-cols-3">
         {filteredAccounts.map((account) => (
-          <AccountCard
-            key={account.accountId}
-            account={account}
-            onPay={() => handlePay(account.accountId)} // Pass down handlePay function
-          />
+          <LazyLoad>
+            <AccountCard
+              key={account.accountId}
+              account={account}
+              onPay={() => handlePay(account.accountId)} // Pass down handlePay function
+            />
+          </LazyLoad>
         ))}
       </div>
     </div>

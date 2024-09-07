@@ -6,7 +6,7 @@ import Login from "../component/Login";
 import OAuth from "../component/OAuth";
 import Register from "../component/Register";
 
-const AuthPage = ({ setIsLogin, setUsername }) => {
+const AuthPage = () => {
   const [mode, setMode] = useState("login");
 
   const toggleMode = (newMode) => {
@@ -34,18 +34,10 @@ const AuthPage = ({ setIsLogin, setUsername }) => {
         </FormButton>
       </div>
 
-      {mode === "login" && (
-        <Login
-          setIsLogin={setIsLogin}
-          setUsername={setUsername}
-          toggleMode={toggleMode}
-        />
-      )}
+      {mode === "login" && <Login toggleMode={toggleMode} />}
       {mode === "register" && <Register toggleMode={toggleMode} />}
       {mode === "forgotPassword" && <ForgotPassword toggleMode={toggleMode} />}
-      {mode === "login" && (
-        <OAuth setIsLogin={setIsLogin} setUsername={setUsername} />
-      )}
+      {mode === "login" && <OAuth />}
     </OverlayPage>
   );
 };

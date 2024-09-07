@@ -7,13 +7,14 @@ import {
   FaRedoAlt,
   FaCreditCard,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const OrderCard = ({
   order,
-  onReOrder,
-  onPayOrder,
-  onCancelOrder,
   statusStats,
+  handleUpdateOrder,
+  handleNewOrder,
+  className = "",
 }) => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -26,10 +27,33 @@ const OrderCard = ({
     });
   };
 
+  const onReOrder = () => {
+    const newOrder = {
+      ...order,
+      status: "Waiting",
+      orderId: Date.now(),
+      orderDate: new Date().toISOString(),
+    };
+    handleNewOrder(newOrder);
+    toast.success("Ordered successfully!");
+  };
+
+  const onPayOrder = () => {
+    const updatedOrder = { ...order, paid: true };
+    handleUpdateOrder(updatedOrder);
+    toast.success("Payment successful!");
+  };
+
+  const onCancelOrder = () => {
+    const updatedOrder = { ...order, status: "Cancelled" };
+    handleUpdateOrder(updatedOrder);
+    toast.success("Order canceled successfully!");
+  };
+
   return (
     <div
       key={order.orderId}
-      className="rounded-lg shadow-lg overflow-hidden transition-transform bg-gray-800 duration-300 hover:scale-105"
+      className={`rounded-lg shadow-lg overflow-hidden bg-gray-800 ${className}`}
     >
       <div className="flex flex-row h-full">
         <div className="flex-shrink-0 bg-white w-24 sm:w-32 md:w-48">

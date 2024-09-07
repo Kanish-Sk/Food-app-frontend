@@ -73,28 +73,34 @@ const Input = (props) => {
         placeholder=""
         value={inputState.value}
         onFocus={handleTouch}
+        disabled={props.disabled}
         className={`block w-full h-full px-4 py-3 text-gray-200 bg-gray-800 border-2 rounded-md focus:outline-none transition-all duration-300
           ${inputState.isTouch ? "mt-10" : ""}
           ${
             inputState.isTouch
               ? inputState.isStateChange
-                ? "border-green-500"
+                ? props.disabled
+                  ? "border-gray-700"
+                  : "border-green-500"
                 : "border-red-500"
               : "border-gray-600"
           }`}
         onChange={changeHandler}
+        onBlur={changeHandler}
       />
       <label
         htmlFor={props.name}
-        className={`absolute left-4 transition-all duration-300 pointer-events-none ${
+        className={`absolute left-4 transition-all duration-500 pointer-events-none ${
           inputState.isTouch
-            ? "transform -translate-y-12 scale-x-100 -left-1 top-4"
-            : "text-gray-400 top-3"
+            ? "transform -translate-y-12 scale-x-100 left-2 top-4"
+            : "top-3"
         }
         ${
           inputState.isTouch
             ? inputState.isStateChange
-              ? "text-green-400"
+              ? props.disabled
+                ? "text-gray-100"
+                : "text-green-400"
               : "text-red-400"
             : "text-gray-400"
         }`}

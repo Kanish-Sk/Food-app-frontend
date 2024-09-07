@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import FormButton from "../../Shared/FormElements/FormButton";
 import LinkButton from "../../Shared/FormElements/LinkButton";
 import Input from "../../Shared/FormElements/Input";
 import { VALIDATOR_REQUIRE } from "../../Shared/utils/validators";
 import { useForm } from "../../Shared/hooks/form-hook";
+import { userData } from "../../Shared/data/UserData";
+import { UserContext } from "../../Shared/context/UserContext";
 
-const Login = ({ setIsLogin, setUsername, toggleMode }) => {
+const Login = ({ toggleMode }) => {
+  const { setUsername, setDarkMode, setIsLogin } = useContext(UserContext);
   const [formState, inputHandler] = useForm(
     {
       username: {
@@ -25,11 +28,16 @@ const Login = ({ setIsLogin, setUsername, toggleMode }) => {
     e.preventDefault();
     if (formState.isValid) {
       console.log(formState.inputs);
-      if (
-        formState.inputs.username.value === "kanish" &&
-        formState.inputs.password.value === "1234"
-      ) {
-        setUsername(formState.inputs.username.value);
+
+      const founduser = userData.find(
+        (user) =>
+          formState.inputs.username.value === user.username &&
+          formState.inputs.password.value === user.password
+      );
+
+      if (founduser) {
+        setUsername(founduser.username);
+        setDarkMode(founduser.darkMode);
         setIsLogin(true);
         toast.success("Logged in successfully");
       } else {

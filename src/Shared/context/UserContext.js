@@ -4,15 +4,21 @@ import React, { createContext, useState } from "react";
 export const UserContext = createContext({
   username: "",
   setUsername: () => {},
-  theme: null,
-  setTheme: () => {},
+  isLogin: false,
+  setIsLogin: () => {},
+  darkMode: false,
+  setDarkMode: () => {},
+  darkModeEditPermission: true,
+  setDarkModeEditPermission: () => {},
   searchQuery: null,
   setSearchQuery: () => {},
 });
 
 export const UserProvider = ({ children }) => {
   const [username, setUsername] = useState(null);
-  const [theme, setTheme] = useState(null);
+  const [isLogin, setIsLogin] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const [darkModeEditPermission, setDarkModeEditPermission] = useState(true);
   const [searchQuery, setSearchQuery] = useState(null);
 
   return (
@@ -20,8 +26,12 @@ export const UserProvider = ({ children }) => {
       value={{
         username,
         setUsername,
-        theme,
-        setTheme,
+        isLogin,
+        setIsLogin,
+        darkMode,
+        setDarkMode,
+        darkModeEditPermission,
+        setDarkModeEditPermission,
         searchQuery,
         setSearchQuery,
       }}

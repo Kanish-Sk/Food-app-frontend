@@ -33,13 +33,21 @@ const Register = ({ toggleMode }) => {
   );
 
   const handleEmailVerification = () => {
-    if (formState.inputs.email.isValid) {
-      setIsEmailVerified(true);
-      toast.success("Email verification link sent to your email.");
-    } else {
-      setIsEmailVerified(false);
-      toast.error("Invalid email address.");
+    const email = formState.inputs.email.value.trim();
+
+    if (!email) {
+      toast.error("Please enter an email address.");
+      return;
     }
+
+    if (!formState.inputs.email.isValid) {
+      toast.error("Invalid email address.");
+      return;
+    }
+
+    // Simulate email verification process
+    setIsEmailVerified(true);
+    toast.success("Email verification link sent to your email.");
   };
 
   const handleSubmit = (e) => {
