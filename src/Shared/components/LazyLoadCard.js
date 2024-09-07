@@ -6,28 +6,24 @@ const LazyLoad = ({ children, threshold = 0.1, rootMargin = "10px" }) => {
   const ref = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
-      },
-      {
-        root: null,
-        rootMargin,
-        threshold,
-      }
-    );
+    const callback = ([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    };
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const observer = new IntersectionObserver(callback, {
+      root: null,
+      rootMargin,
+      threshold,
+    });
+
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [rootMargin, threshold]);
@@ -35,7 +31,7 @@ const LazyLoad = ({ children, threshold = 0.1, rootMargin = "10px" }) => {
   const animationProps = useSpring({
     opacity: isVisible ? 1 : 0,
     transform: isVisible ? "translateX(0px)" : "translateX(-50px)", // Slide in from left
-    config: { tension: 120, friction: 14 },
+    config: { mass: 1, tension: 170, friction: 20 }, // Smooth animation
   });
 
   return (
