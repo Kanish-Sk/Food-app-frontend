@@ -12,6 +12,27 @@ code {
     monospace;
 }
 
+/* src/index.css */
+.neon-border {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.neon-border:hover {
+  box-shadow: 0 0 40px;
+}
+
+.neon-border-green:hover {
+  box-shadow: 0 0 40px rgb(111, 253, 111);
+}
+
+.neon-border-red:hover {
+  box-shadow: 0 0 40px red; /* Red glow on hover */
+}
+
+.neon-border-blue:hover {
+  box-shadow: 0 0 40px blue; /* Blue glow on hover */
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 @tailwind base;
 @tailwind components;
