@@ -4,15 +4,15 @@ import FormButton from "../../Shared/FormElements/FormButton";
 import LinkButton from "../../Shared/FormElements/LinkButton";
 import Input from "../../Shared/FormElements/Input";
 import {
+  VALIDATOR_EMAIL,
   VALIDATOR_MAXLENGTH,
   VALIDATOR_MINLENGTH,
-  VALIDATOR_PHONE,
   VALIDATOR_REQUIRE,
 } from "../../Shared/utils/validators";
 import { useForm } from "../../Shared/hooks/form-hook";
 import OTPInput from "./OTPInput";
 
-const Register = ({ toggleMode, toggleLoading }) => {
+const Register = ({ toggleMode, toggleLoading, user }) => {
   const [enableOTP, setEnableOTP] = useState(false);
   const [isOTPVerified, setIsOTPVerified] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
@@ -23,7 +23,7 @@ const Register = ({ toggleMode, toggleLoading }) => {
         value: "",
         isValid: false,
       },
-      phoneNumber: {
+      Email: {
         value: "",
         isValid: false,
       },
@@ -36,13 +36,13 @@ const Register = ({ toggleMode, toggleLoading }) => {
   );
 
   const handleSendOTP = async () => {
-    if (!formState.inputs.phoneNumber?.value) {
-      toast.error("Please enter your phone number");
+    if (!formState.inputs.Email?.value) {
+      toast.error("Please enter Emial Address");
       return;
     }
 
-    if (!formState.inputs.phoneNumber.isValid) {
-      toast.error("Please enter a valid phone number");
+    if (!formState.inputs.Email.isValid) {
+      toast.error("Please enter a valid Email Address");
       return;
     }
 
@@ -82,7 +82,7 @@ const Register = ({ toggleMode, toggleLoading }) => {
   useEffect(() => {
     setEnableOTP(false);
     setIsOTPVerified(false);
-  }, [formState.inputs.phoneNumber.isValid]);
+  }, [formState.inputs.Email.isValid]);
 
   useEffect(() => {
     let timer;
@@ -119,10 +119,10 @@ const Register = ({ toggleMode, toggleLoading }) => {
       />
 
       <Input
-        id="phoneNumber"
-        type="tel"
-        name="Phone Number"
-        validators={[VALIDATOR_REQUIRE(), VALIDATOR_PHONE()]}
+        id="Email"
+        type="email"
+        name="Email"
+        validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
         onInput={inputHandler}
       />
       <p
@@ -160,7 +160,7 @@ const Register = ({ toggleMode, toggleLoading }) => {
           disabled={!formState.isValid || !isOTPVerified}
           className="h-12 px-3 w-full text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors duration-300"
         >
-          Register
+          {user ? "Hotel Owner" : "User"}
         </FormButton>
       </div>
       <p className="text-center text-sm text-gray-400">

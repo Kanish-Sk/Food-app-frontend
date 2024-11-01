@@ -6,10 +6,17 @@ import Login from "../component/Login";
 import OAuth from "../component/OAuth";
 import Register from "../component/Register";
 import LoadingOverlay from "../../Shared/components/LoadingOverLay";
+import { FaHotel, FaUser } from "react-icons/fa";
+import RestPassword from "../component/RestPassword";
 
 const AuthPage = () => {
   const [mode, setMode] = useState("login");
+  const [isUser, setIsUer] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  const toggleUser = () => {
+    setIsUer((prev) => !prev);
+  };
 
   const toggleLoading = () => {
     setIsLoading((prev) => !prev);
@@ -20,7 +27,19 @@ const AuthPage = () => {
   };
 
   return (
-    <OverlayPage glowColor={"neon-border-green"}>
+    <OverlayPage
+      glowColor={"neon-border-green"}
+      icon={
+        isUser ? (
+          <FaUser className="size-5 text-white" />
+        ) : (
+          <FaHotel className="size-5 text-white" />
+        )
+      }
+      toggleCard={toggleUser}
+      isUser={isUser}
+      mode={mode}
+    >
       {isLoading && <LoadingOverlay />}
       <div className="flex justify-between space-x-4 mb-6 ">
         <FormButton
@@ -41,11 +60,20 @@ const AuthPage = () => {
         </FormButton>
       </div>
 
-      {mode === "login" && <Login toggleMode={toggleMode} />}
+      {mode === "login" && <Login toggleMode={toggleMode} user={isUser} />}
       {mode === "register" && (
-        <Register toggleMode={toggleMode} toggleLoading={toggleLoading} />
+        <Register
+          toggleMode={toggleMode}
+          toggleLoading={toggleLoading}
+          user={isUser}
+        />
       )}
-      {mode === "forgotPassword" && <ForgotPassword toggleMode={toggleMode} />}
+      {mode === "reset" && (
+        <RestPassword toggleMode={toggleMode} toggleLoading={toggleLoading} />
+      )}
+      {mode === "forgotPassword" && (
+        <ForgotPassword toggleMode={toggleMode} toggleLoading={toggleLoading} />
+      )}
       {mode === "login" && <OAuth />}
     </OverlayPage>
   );

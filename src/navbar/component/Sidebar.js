@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import Logo from "../../Shared/images/Grab.png";
 import { data } from "./SideBarDetails";
@@ -10,12 +10,14 @@ const SideBar = () => {
   const { setUsername, setIsLogin, setDarkMode } = useContext(UserContext);
   const location = useLocation();
   const [activePath, setActivepath] = useState(location.pathname);
+  const navigate = useNavigate();
 
   const handleLoggout = () => {
     setUsername("");
     setIsLogin(false);
     setDarkMode(false);
     toast.success("Loggout succesfully.");
+    navigate("/");
   };
 
   useEffect(() => {
@@ -72,7 +74,7 @@ const SideBar = () => {
 
       {/* Logout */}
       <div className="flex text-black items-center justify-center w-full mb-20 md:mb-0 md:w-auto mt-10 md:mt-auto">
-        <Link onClick={handleLoggout}>
+        <div onClick={handleLoggout} className="cursor-pointer">
           <div className="badge btninner border-2 bg-black md:before:bg-green-400">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +92,7 @@ const SideBar = () => {
             </svg>
             <p className="block md:hidden">Logout</p>
           </div>
-        </Link>
+        </div>
       </div>
     </nav>
   );

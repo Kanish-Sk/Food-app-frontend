@@ -8,7 +8,8 @@ import { useForm } from "../../Shared/hooks/form-hook";
 import { userData } from "../../Shared/data/UserData";
 import { UserContext } from "../../Shared/context/UserContext";
 
-const Login = ({ toggleMode }) => {
+const Login = ({ toggleMode, user }) => {
+  console.log(user);
   const { setUsername, setDarkMode, setIsLogin } = useContext(UserContext);
   const [formState, inputHandler] = useForm(
     {
@@ -75,7 +76,7 @@ const Login = ({ toggleMode }) => {
           disabled={!formState.isValid}
           className="h-12 px-3 w-full text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors duration-300"
         >
-          Login
+          {user ? "Hotel Owner" : "User"}
         </FormButton>
       </div>
     </form>
