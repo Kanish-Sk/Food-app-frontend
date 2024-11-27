@@ -4,16 +4,18 @@ import { useContext } from "react";
 import { UserContext } from "../../Shared/context/UserContext";
 
 const OAuth = () => {
-  const { setIsLogin, setUsername } = useContext(UserContext);
+  const { setIsLogin, setUsername, setRole } = useContext(UserContext);
   const handleGoogle = () => {
     setUsername("Google login");
     setIsLogin(true);
+    setRole("user");
     toast.success("Logged in through Google");
   };
 
   const handleGitHub = () => {
     setUsername("Github login");
     setIsLogin(true);
+    setRole("user");
     toast.success("Logged in through GitHub");
   };
 

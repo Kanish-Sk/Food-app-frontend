@@ -127,7 +127,10 @@ const ProfileDetails = ({ profileData, onSave }) => {
         <FormButton
           type="button"
           onClick={isEditing ? handleSave : toggleEdit}
+          disabled={!formState.isValid}
           className={`h-10 sm:h-12 px-2 sm:px-3 w-full text-white rounded-md ${
+            !formState.isValid ? "opacity-50 cursor-not-allowed" : ""
+          } ${
             isEditing
               ? "bg-green-600 hover:bg-green-700 focus:ring-green-500"
               : "bg-gray-600 hover:bg-gray-700 focus:ring-gray-500"

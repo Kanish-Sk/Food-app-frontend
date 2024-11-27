@@ -160,7 +160,7 @@ const Register = ({ toggleMode, toggleLoading, user }) => {
           disabled={!formState.isValid || !isOTPVerified}
           className="h-12 px-3 w-full text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors duration-300"
         >
-          {user ? "Hotel Owner" : "User"}
+          {user ? "Register as Hotel Owner" : "Register as User"}
         </FormButton>
       </div>
       <p className="text-center text-sm text-gray-400">

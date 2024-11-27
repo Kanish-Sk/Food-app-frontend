@@ -5,6 +5,7 @@ export const orders = [
     accountId: 1,
     dishId: 1,
     hotelId: 1,
+    hotelName: "Saravana Bhavan",
     status: "Delivered",
     orderDate: "2024-07-21T14:30:00Z",
     price: 20,
@@ -18,6 +19,7 @@ export const orders = [
     dishId: 1,
     hotelId: 2,
     status: "Preparing",
+    hotelName: "Saravana Bhavan",
     orderDate: "2024-09-01T09:15:00Z",
     price: 30,
     quantity: 1, // Added quantity
@@ -30,6 +32,7 @@ export const orders = [
     dishId: 3,
     hotelId: 3,
     status: "Waiting",
+    hotelName: "Murugan Idli Shop",
     orderDate: "2024-09-03T17:45:00Z",
     price: 180,
     quantity: 3, // Added quantity
@@ -42,6 +45,7 @@ export const orders = [
     dishId: 2,
     hotelId: 1,
     status: "Delivered",
+    hotelName: "Anjappar Chettinad",
     orderDate: "2024-09-05T12:00:00Z",
     price: 40,
     quantity: 4, // Added quantity
@@ -53,6 +57,7 @@ export const orders = [
     accountId: 5,
     dishId: 3,
     hotelId: 2,
+    hotelName: "Anjappar Chettinad",
     status: "Cancelled",
     orderDate: "2024-09-07T18:30:00Z",
     price: 20,

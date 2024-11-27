@@ -43,7 +43,7 @@ const AccountCard = ({ account, onPay }) => {
   };
 
   const handleOrders = () => {
-    navigate("/order");
+    navigate(`/order/${hotelName.replace(/\s+/g, "-")}`);
   };
 
   return (

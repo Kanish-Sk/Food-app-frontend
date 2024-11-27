@@ -10,6 +10,9 @@ export const userData = [
     darkMode: true,
     location: "Gce salem",
     amount: 3000,
+    role: "user",
+    image:
+      "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcR6AK1OtJ2FXnHR6omrAJwzJUpDnlRN4K-L3NfsTyFLYE2M4MFb26tkd0lxmNiNcEtINJw_Bjvc3RrQysQ",
   },
   {
     userId: 2,
@@ -18,9 +21,27 @@ export const userData = [
     email: "harish@gmail.com",
     phoneNumber: "9123456780",
     accounts: [1, 2, 3, 4, 5],
+    orders: [],
+    darkMode: false,
+    location: "Gce salem",
+    amount: 300,
+    role: "user",
+    image:
+      "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcR6AK1OtJ2FXnHR6omrAJwzJUpDnlRN4K-L3NfsTyFLYE2M4MFb26tkd0lxmNiNcEtINJw_Bjvc3RrQysQ",
+  },
+  {
+    userId: 3,
+    username: "owner",
+    password: "1234",
+    email: "harish@gmail.com",
+    phoneNumber: "9123456780",
+    accounts: [],
     orders: [1, 2, 3, 4, 5],
     darkMode: false,
     location: "Gce salem",
     amount: 3000,
+    role: "owner",
+    image:
+      "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcR6AK1OtJ2FXnHR6omrAJwzJUpDnlRN4K-L3NfsTyFLYE2M4MFb26tkd0lxmNiNcEtINJw_Bjvc3RrQysQ",
   },
 ];

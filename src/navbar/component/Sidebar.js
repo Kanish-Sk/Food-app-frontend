@@ -1,24 +1,37 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import Logo from "../../Shared/images/Grab.png";
-import { data } from "./SideBarDetails";
+import { userSideBarDetails } from "./UserSideBarDetails";
+import { OwnerSideBarDetails } from "./OwnerSideBarDetails";
 import "../../Shared/styles/buttonStyle.css";
 import { toast } from "react-toastify";
 import { UserContext } from "../../Shared/context/UserContext";
 
 const SideBar = () => {
-  const { setUsername, setIsLogin, setDarkMode } = useContext(UserContext);
+  const { role, setUsername, setIsLogin, setDarkMode, setRole } =
+    useContext(UserContext);
   const location = useLocation();
   const [activePath, setActivepath] = useState(location.pathname);
   const navigate = useNavigate();
+
+  const [data, setData] = useState({});
 
   const handleLoggout = () => {
     setUsername("");
     setIsLogin(false);
     setDarkMode(false);
+    setRole("");
     toast.success("Loggout succesfully.");
     navigate("/");
   };
+
+  useEffect(() => {
+    if (role === "user") {
+      setData(userSideBarDetails);
+    } else if (role === "owner") {
+      setData(OwnerSideBarDetails);
+    }
+  }, [role]);
 
   useEffect(() => {
     setActivepath(location.pathname);

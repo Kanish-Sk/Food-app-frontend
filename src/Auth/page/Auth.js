@@ -11,7 +11,7 @@ import RestPassword from "../component/RestPassword";
 
 const AuthPage = () => {
   const [mode, setMode] = useState("login");
-  const [isUser, setIsUer] = useState(true);
+  const [isUser, setIsUer] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const toggleUser = () => {
@@ -74,7 +74,7 @@ const AuthPage = () => {
       {mode === "forgotPassword" && (
         <ForgotPassword toggleMode={toggleMode} toggleLoading={toggleLoading} />
       )}
-      {mode === "login" && <OAuth />}
+      {mode === "login" && !isUser && <OAuth />}
     </OverlayPage>
   );
 };

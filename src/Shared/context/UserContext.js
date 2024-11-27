@@ -1,9 +1,10 @@
 import React, { createContext, useState } from "react";
 
-// Create a context with default values
 export const UserContext = createContext({
-  username: "",
+  username: null,
   setUsername: () => {},
+  role: null,
+  setRole: () => {},
   isLogin: false,
   setIsLogin: () => {},
   darkMode: false,
@@ -16,6 +17,7 @@ export const UserContext = createContext({
 
 export const UserProvider = ({ children }) => {
   const [username, setUsername] = useState(null);
+  const [role, setRole] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [darkModeEditPermission, setDarkModeEditPermission] = useState(true);
@@ -26,6 +28,8 @@ export const UserProvider = ({ children }) => {
       value={{
         username,
         setUsername,
+        role,
+        setRole,
         isLogin,
         setIsLogin,
         darkMode,

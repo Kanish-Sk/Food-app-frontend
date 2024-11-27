@@ -4,7 +4,7 @@ const LoadingOverlay = () => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-75">
       <svg
-        className="animate-spin h-12 w-12 text-white"
+        className="animate-spin h-12 w-12 text-green-600"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

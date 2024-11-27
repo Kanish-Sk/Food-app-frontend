@@ -1,4 +1,4 @@
-export const data = {
+export const OwnerSideBarDetails = {
   home: {
     svg: (
       <svg
@@ -16,7 +16,7 @@ export const data = {
         />
       </svg>
     ),
-    path: "/",
+    path: "/owner",
   },
   profile: {
     svg: (
@@ -35,7 +35,26 @@ export const data = {
         />
       </svg>
     ),
-    path: "/profile",
+    path: "/owner/profile",
+  },
+  customers: {
+    svg: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={2.0}
+        stroke="currentColor"
+        className="size-6 text-white"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15 11.25a3.75 3.75 0 1 0-7.5 0 3.75 3.75 0 0 0 7.5 0Zm4.5 9v-.75a6.75 6.75 0 0 0-13.5 0v.75m13.5 0h-13.5"
+        />
+      </svg>
+    ),
+    path: "/owner/customers",
   },
   account: {
     svg: (
@@ -54,7 +73,7 @@ export const data = {
         />
       </svg>
     ),
-    path: "/account",
+    path: "/owner/account",
   },
   orders: {
     svg: (
@@ -73,6 +92,6 @@ export const data = {
         />
       </svg>
     ),
-    path: "/order",
+    path: "/owner/order",
   },
 };

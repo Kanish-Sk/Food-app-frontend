@@ -9,8 +9,15 @@ import Profile from "./Proflie/page/Profile";
 import { UserContext } from "./Shared/context/UserContext";
 import { ToastContainer } from "react-toastify";
 import Order from "./Orders/page/Order";
+import Cart from "./Cart/page/Cart";
 import AuthPage from "./Auth/page/Auth";
 import Account from "./Account/page/Accout";
+import OwnerHome from "./ownerHome/page/OwnerHome";
+import OwnerProfile from "./OwnerProfile/page/OwnerPrfile";
+import OwnerCustomers from "./OwnerCustomers/page/OwnerCustomers";
+import OwnerAccount from "./OwnerAccount/page/OwnerAccount";
+import OwnerOrders from "./OwnerOrders/page/OwnerOrders";
+import BottomCartIcon from "./Cart/components/BottomCart";
 
 const App = () => {
   const { username, isLogin, darkMode } = useContext(UserContext);
@@ -28,9 +35,23 @@ const App = () => {
             {isLogin && (
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/owner" element={<OwnerHome />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/order" element={<Order />} />
+                <Route path="/owner/profile" element={<OwnerProfile />} />
+                <Route
+                  path="/owner/customer/:customerId"
+                  element={<OwnerCustomers />}
+                />
+                <Route path="/owner/customers" element={<OwnerCustomers />} />
+                <Route path="/order/:hotelName" element={<Order />} />
+                <Route path="/owner/order" element={<OwnerOrders />} />
                 <Route path="/account" element={<Account />} />
+                <Route
+                  path="/owner/account/:accoundId"
+                  element={<OwnerAccount />}
+                />
+                <Route path="/owner/accounts" element={<OwnerAccount />} />
                 <Route path="/:hotelname/dishes" element={<HotelDetails />} />
               </Routes>
             )}
@@ -48,6 +69,7 @@ const App = () => {
           draggable
           pauseOnHover
         />
+        {isLogin && <BottomCartIcon />}
       </div>
     </Router>
   );

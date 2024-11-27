@@ -57,19 +57,19 @@ const HotelDetails = () => {
 
       <div className="bg-gray-800 shadow-xl -mt-10 relative mx-4 rounded-xl overflow-hidden border-t-4 border-gray-200">
         <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-700">
-          <div className="p-6 hover:bg-gray-700 transition-colors duration-300">
+          <div className="p-6 hover:bg-gray-700 transition-colors duration-300 place-items-center">
             <h3 className="text-lg font-semibold mb-2 flex items-center text-cyan-400">
               <FaPhone className="mr-2" /> Contact
             </h3>
             <p className="text-gray-300">{hotelDetails.contact}</p>
           </div>
-          <div className="p-6 hover:bg-gray-700 transition-colors duration-300">
+          <div className="p-6 hover:bg-gray-700 w-full  transition-colors duration-300 place-items-center">
             <h3 className="text-lg font-semibold mb-2 flex items-center text-purple-400">
               <FaMapMarkerAlt className="mr-2" /> Location
             </h3>
             <p className="text-gray-300">{hotelDetails.location}</p>
           </div>
-          <div className="p-6 hover:bg-gray-700 transition-colors duration-300">
+          <div className="p-6 hover:bg-gray-700 transition-colors duration-300 place-items-center">
             <h3 className="text-lg font-semibold mb-2 flex items-center text-pink-400">
               <FaClock className="mr-2" /> Hours
             </h3>
@@ -97,7 +97,7 @@ const HotelDetails = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-4">
             {filteredDishes.map((dish) => (
               <LazyLoad>
-                <Dish key={dish.id} dish={dish} />
+                <Dish key={dish.id} dish={dish} hotelName={hotelDetails.name} />
               </LazyLoad>
             ))}
           </div>

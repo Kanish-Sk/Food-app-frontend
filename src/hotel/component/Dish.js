@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import "./Dish.css";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -7,17 +7,34 @@ import {
   FaClock,
   FaUtensils,
   FaShoppingCart,
+  FaPlus,
+  FaMinus,
 } from "react-icons/fa";
+import { CartContext } from "../../Shared/context/CartContext";
 
-const Dish = ({ dish }) => {
+const Dish = ({ dish, hotelName }) => {
   const [expanded, setExpanded] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useContext(CartContext);
 
-  const handleOrder = useCallback((e) => {
-    e.stopPropagation();
-    toast.success("Order Placed Successfully!");
-    setExpanded(false);
-  }, []);
+  const handleOrder = useCallback(
+    (e) => {
+      e.stopPropagation();
+      const orderItem = {
+        ...dish,
+        quantity,
+        time: new Date().toISOString(),
+        hotelName,
+      };
+      console.log("*^(&(&*%&*)(", orderItem);
+      addToCart(orderItem);
+      toast.success(`${quantity} ${dish.name} added to the cart!`);
+      setExpanded(false);
+      setQuantity(1); // Reset quantity after order
+    },
+    [quantity, addToCart, dish, hotelName]
+  );
 
   const handleExpand = useCallback(() => {
     setExpanded((prevExpanded) => !prevExpanded);
@@ -29,6 +46,16 @@ const Dish = ({ dish }) => {
 
   const handleLoadedImage = useCallback(() => {
     setImageFailed(false);
+  }, []);
+
+  const handleIncrement = useCallback((e) => {
+    e.stopPropagation();
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  }, []);
+
+  const handleDecrement = useCallback((e) => {
+    e.stopPropagation();
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   }, []);
 
   const getTypeColor = (type) => {
@@ -96,12 +123,27 @@ const Dish = ({ dish }) => {
                 {dish.type}
               </span>
             </div>
+            <div className="flex justify-between items-center mt-4">
+              <button
+                onClick={handleDecrement}
+                className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 transition duration-200"
+              >
+                <FaMinus />
+              </button>
+              <span className="text-lg font-bold">{quantity}</span>
+              <button
+                onClick={handleIncrement}
+                className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 transition duration-200"
+              >
+                <FaPlus />
+              </button>
+            </div>
           </div>
           <button
             onClick={handleOrder}
             className="w-full max-w-xs mt-6 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-bold py-3 px-4 rounded-lg text-sm transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center"
           >
-            <FaShoppingCart className="mr-2" /> Order Now
+            <FaShoppingCart className="mr-2" /> Add to Cart
           </button>
         </div>
       ) : (

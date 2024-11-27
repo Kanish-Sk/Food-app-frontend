@@ -84,6 +84,7 @@ export const hotelsDetails = [
 
 export const topDishes = [
   {
+    id: 1,
     name: "Idli",
     price: 20,
     hotelName: "Saravana Bhavan",
@@ -92,6 +93,7 @@ export const topDishes = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoWFVpIrZRPR-_dDGNPgwQ2Ut1zts17NHWRA&s",
   },
   {
+    id: 2,
     name: "Podi Idli",
     price: 30,
     hotelName: "Murugan Idli Shop",
@@ -100,6 +102,7 @@ export const topDishes = [
       "https://threewhistleskitchen.com/wp-content/uploads/2019/08/Podi-Idli-Featured.jpg",
   },
   {
+    id: 3,
     name: "Chicken Chettinad",
     price: 150,
     hotelName: "Anjappar Chettinad Restaurant",
